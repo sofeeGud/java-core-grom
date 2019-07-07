@@ -26,19 +26,17 @@ public class UserRepository {
     }
 
     public long[] getUserIds() {
-        int j = 0;
+        int len = 0;
         for (User user : users) {
             if (user != null && user.getId() != 0)
-                j++;
+                len++;
         }
 
-        long[] newId = new long[j];
+        long[] newId = new long[len];
         int i = 0;
-
         for (User user : users) {
             if (user != null && user.getId() != 0) {
-                i++;
-                newId[i] = user.getId();
+                newId[i++] = user.getId();
             }
         }
         return newId;
