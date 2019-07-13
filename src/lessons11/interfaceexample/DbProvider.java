@@ -1,6 +1,6 @@
 package lessons11.interfaceexample;
 
-public interface DbProvide {
+public interface DbProvider {
 
 
     void connectToDb();
