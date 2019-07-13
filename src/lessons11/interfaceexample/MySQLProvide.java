@@ -13,7 +13,7 @@ public class MySQLProvide implements DbProvide {
     }
 
     @Override
-    public void encrypttData() {
+    public void encryptData() {
 
     }
 }

@@ -7,6 +7,6 @@ public interface DbProvide {
 
     void disconnectFromDb();
 
-    void encrypttData();
+    void encryptData();
 
 }
