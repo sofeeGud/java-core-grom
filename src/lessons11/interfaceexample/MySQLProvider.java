@@ -1,6 +1,6 @@
 package lessons11.interfaceexample;
 
-public class MySQLProvide implements DbProvider {
+public class MySQLProvider implements DbProvider {
 
     @Override
     public void connectToDb() {
