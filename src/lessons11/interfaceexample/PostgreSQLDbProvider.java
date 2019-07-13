@@ -3,12 +3,12 @@ package lessons11.interfaceexample;
 public class PostgreSQLDbProvider implements DbProvide {
 
     @Override
-    public void connecktToDb() {
-        
+    public void connectToDb() {
+
     }
 
     @Override
-    public void disconnecktFromDb() {
+    public void disconnectFromDb() {
 
     }
 

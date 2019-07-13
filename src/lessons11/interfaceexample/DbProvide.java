@@ -3,10 +3,10 @@ package lessons11.interfaceexample;
 public interface DbProvide {
 
 
-     void connecktToDb();
+    void connectToDb();
 
-     void disconnecktFromDb();
+    void disconnectFromDb();
 
-     void encrypttData();
+    void encrypttData();
 
 }
