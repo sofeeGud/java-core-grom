@@ -15,23 +15,35 @@ public class Controller {
                 if (room != null) {
                     api.findRooms(price, persons, city, hotel);
                     len++;
+                    continue;
                 }
             }
         }
 
-        int i = 0;
         Room[] roomReq = new Room[len];
+        Room[] result = new Room[len];
         for (API api : apis) {
-            for (Room room : api.getAll()) {
-                if (room != null) {
-                    api.findRooms(price, persons, city, hotel);
-                    roomReq[i++] = room;
-                }
+            if (api != null){
+                 roomReq = api.findRooms(price, persons, city, hotel);
+                  if (roomReq != null) result = arrayPush(result, roomReq);
             }
-
         }
         return roomReq;
 
+
+    }
+
+    public Room[] arrayPush(Room[] roomReq, Room[] result) {
+        Room[] sum = new Room[roomReq.length + result.length];
+
+        int i = 0;
+        for (Room room : roomReq) {
+            sum[i++] = room;
+        }
+        for (Room room : result) {
+            sum[i++] = room;
+        }
+        return sum;
     }
 
     public Room[] check(API api1, API api2) {
