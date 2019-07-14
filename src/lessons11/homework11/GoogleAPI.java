@@ -14,14 +14,16 @@ public class GoogleAPI implements API {
 
         int len = 0;
         for (Room room : rooms) {
-            if (room != null && price == price && persons == persons && city == city && hotel == hotel) {
+            if (room != null && price == room.getPrice() && persons == room.getPersons()
+                    && city == room.getCityName() && hotel == room.getHotelName()) {
                 len++;
             }
         }
         Room[] roomAll = new Room[len];
         int i = 0;
         for (Room room : rooms) {
-            if (room != null && price == price && persons == persons && city == city && hotel == hotel) {
+            if (room != null && price == room.getPrice() && persons == room.getPersons()
+                    && city == room.getCityName() && hotel == room.getHotelName()) {
                 roomAll[i++] = room;
             }
         }
