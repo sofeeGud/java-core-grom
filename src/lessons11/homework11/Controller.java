@@ -21,7 +21,7 @@ public class Controller {
         Room[] roomReq = new Room[len];
         for (API api : apis) {
             for (Room room : api.getAll()) {
-                api.findRooms(price, persons, city, hotel);
+                if(api.findRooms(price, persons, city, hotel) == roomReq);
                 roomReq[i++] = room;
             }
 
