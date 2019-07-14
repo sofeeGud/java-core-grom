@@ -9,19 +9,19 @@ public class Controller {
     }
 
     public Room[] requestRooms(int price, int persons, String city, String hotel) {
-        int len = 0;
-        for (API api : apis) {
-            for (Room room : api.getAll()) {
-                if (room != null) {
-                    api.findRooms(price, persons, city, hotel);
-                    len++;
-                    break;
-                }
-            }
-        }
+  //      int len = 0;
+//        for (API api : apis) {
+//            for (Room room : api.getAll()) {
+//                if (room != null) {
+//                    api.findRooms(price, persons, city, hotel);
+//                    len++;
+//                    break;
+//                }
+//            }
+//        }
 
-        Room[] roomReq = new Room[len];
-        Room[] result = new Room[len];
+        Room[] roomReq = new Room[0];
+        Room[] result = new Room[0];
         for (API api : apis) {
             if (api != null){
                  roomReq = api.findRooms(price, persons, city, hotel);
