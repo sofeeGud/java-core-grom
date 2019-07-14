@@ -15,7 +15,7 @@ public class Controller {
                 if (room != null) {
                     api.findRooms(price, persons, city, hotel);
                     len++;
-                    continue;
+                    break;
                 }
             }
         }
