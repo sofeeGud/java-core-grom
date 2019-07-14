@@ -20,7 +20,7 @@ public class Controller {
 //            }
 //        }
 
-        Room[] roomReq = new Room[0];
+        Room[] roomReq;
         Room[] result = new Room[0];
         for (API api : apis) {
             if (api != null){
@@ -28,9 +28,8 @@ public class Controller {
                   if (roomReq != null) result = arrayPush(result, roomReq);
             }
         }
-        return roomReq;
 
-
+        return result;
     }
 
     public Room[] arrayPush(Room[] roomReq, Room[] result) {
