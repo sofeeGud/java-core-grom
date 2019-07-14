@@ -11,16 +11,20 @@ public class Controller {
     public Room[] requestRooms(int price, int persons, String city, String hotel) {
         int len = 0;
         for (API api : apis) {
-            for (Room room : api.findRooms(price, persons, city, hotel )){
-            if (room != null) {
-                len++;}
+            for (Room room : api.getAll()) {
+                api.findRooms(price, persons, city, hotel);
+                len++;
             }
         }
 
         int i = 0;
         Room[] roomReq = new Room[len];
         for (API api : apis) {
-            roomReq = api.findRooms(price, persons, city, hotel);
+            for (Room room : api.getAll()) {
+                api.findRooms(price, persons, city, hotel);
+                roomReq[i++] = room;
+            }
+
         }
         return roomReq;
 
