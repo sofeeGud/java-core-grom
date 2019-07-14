@@ -12,8 +12,12 @@ public class Controller {
         int len = 0;
         for (API api : apis) {
             for (Room room : api.getAll()) {
-                api.findRooms(price, persons, city, hotel);
-                len++;
+                if (room != null && price == room.getPrice() &&
+                        persons == room.getPersons() &&
+                        city == room.getCityName() &&
+                        hotel == room.getHotelName()) {
+                    len++;
+                }
             }
         }
 
@@ -21,8 +25,12 @@ public class Controller {
         Room[] roomReq = new Room[len];
         for (API api : apis) {
             for (Room room : api.getAll()) {
-                if(api.findRooms(price, persons, city, hotel) == roomReq);
-                roomReq[i++] = room;
+                if (room != null && price == room.getPrice() &&
+                        persons == room.getPersons() &&
+                        city == room.getCityName() &&
+                        hotel == room.getHotelName()) {
+                    roomReq[i++] = room;
+                }
             }
 
         }
