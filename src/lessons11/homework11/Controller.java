@@ -9,16 +9,6 @@ public class Controller {
     }
 
     public Room[] requestRooms(int price, int persons, String city, String hotel) {
-  //      int len = 0;
-//        for (API api : apis) {
-//            for (Room room : api.getAll()) {
-//                if (room != null) {
-//                    api.findRooms(price, persons, city, hotel);
-//                    len++;
-//                    break;
-//                }
-//            }
-//        }
 
         Room[] roomReq;
         Room[] result = new Room[0];
@@ -77,10 +67,11 @@ public class Controller {
 
     public Room cheapestRoom() {
         Room roomCh = null;
-        int priceMin = 0;
+        int priceMin = 9999999;
         for (API api : apis) {
             for (Room room : api.getAll()) {
-                if (priceMin > room.getPrice()) {
+                if (room != null && room.getPrice() <= priceMin) {
+                    priceMin = room.getPrice();
                     roomCh = room;
                 }
             }
