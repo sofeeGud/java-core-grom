@@ -23,21 +23,22 @@ public class UkrainianBankSystem implements BankSystem {
 
     @Override
     public void transferMoney(User fromUser, User toUser, int amount) {
-        
-        if (!checkWithdraw(fromUser, amount))
-            return;
-
-        if (!checkLimitOfFunding(toUser, amount))
-            return;
-
-        fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
-
-        toUser.setBalance(toUser.getBalance() + amount);
 
         if (fromUser.getBank().getCurrency() != toUser.getBank().getCurrency()){
             System.out.println("Change currency...");
-        }
 
+        } else {
+
+            if (!checkWithdraw(fromUser, amount))
+                return;
+
+            if (!checkLimitOfFunding(toUser, amount))
+                return;
+
+            fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
+
+            toUser.setBalance(toUser.getBalance() + amount);
+        }
     }
 
     @Override
