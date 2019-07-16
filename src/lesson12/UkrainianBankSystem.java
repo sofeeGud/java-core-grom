@@ -38,7 +38,7 @@ public class UkrainianBankSystem implements BankSystem {
 
     @Override
     public void paySalary(User user) {
-        user.setBalance(user.getBank().getAvrSalaryOfEmployee());
+        user.setBalance(user.getBank().getAvrSalaryOfEmployee()/user.getBank().getNumberOfEmployees());
     }
 
     private boolean checkWithdraw(User user, int amount) {
