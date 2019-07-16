@@ -12,5 +12,6 @@ public class Main {
         bankSystem.transferMoney(user, user2, 10);
 
         System.out.println(user.getBalance());
+        System.out.println(user2.getBalance());
     }
 }

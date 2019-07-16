@@ -25,7 +25,7 @@ public class UkrainianBankSystem implements BankSystem {
     public void transferMoney(User fromUser, User toUser, int amount) {
 
         if (fromUser.getBank().getCurrency() != toUser.getBank().getCurrency()){
-            System.out.println("Change currency...");
+            System.err.println("Change currency...");
 
         } else {
 
