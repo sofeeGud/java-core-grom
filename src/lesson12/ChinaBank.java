@@ -22,7 +22,7 @@ public class ChinaBank extends Bank {
 
     @Override
     public double getMonthlyRate() {
-        if (getCurrency() == Currency.EUR)
+        if (getCurrency() == Currency.USD)
             return 0.01;
         else
             return 0;

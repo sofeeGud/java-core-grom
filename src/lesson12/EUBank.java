@@ -21,10 +21,9 @@ public class EUBank extends Bank {
 
     @Override
     public double getMonthlyRate() {
-        if (getCurrency() == Currency.USD)
+        if (getCurrency() == Currency.EUR)
             return 0.01;
-        else
-            return Integer.MIN_VALUE;
+        return 1;
     }
 
     @Override
