@@ -7,8 +7,7 @@ public class Main {
         User user = new User(1001, "Denis", 12200, 40,"GMD",1500, usBank);
 
         BankSystem bankSystem = new UkrainianBankSystem();
-        //bankSystem.withdraw(user, 150);
-        bankSystem.fund(user, 200);
+        bankSystem.transferMoney(user, user, 10);
 
         System.out.println(user.getBalance());
     }
