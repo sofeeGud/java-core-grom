@@ -1,6 +1,6 @@
-package lessons11.interfaceexample;
+package lesson11.interfaceexample;
 
-public class MySQLProvider implements DbProvider {
+public class PostgreSQLDbProvider implements DbProvider {
 
     @Override
     public void connectToDb() {

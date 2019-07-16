@@ -1,4 +1,4 @@
-package lessons11.homework11;
+package lesson11.homework11;
 
 public class BookingComAPI implements API {
 

@@ -1,7 +1,6 @@
-package lessons11.interfaceexample;
+package lesson11.interfaceexample;
 
-
-public class OracleDbProvider implements DbProvider {
+public class MySQLProvider implements DbProvider {
 
     @Override
     public void connectToDb() {

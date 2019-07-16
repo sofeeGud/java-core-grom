@@ -1,4 +1,4 @@
-package lessons11.biginterfaceexample;
+package lesson11.biginterfaceexample;
 
 public class SimpleReader implements Readable {
 

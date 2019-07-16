@@ -1,4 +1,4 @@
-package lessons11.interfaceexample;
+package lesson11.interfaceexample;
 
 public interface DbProvider {
 
