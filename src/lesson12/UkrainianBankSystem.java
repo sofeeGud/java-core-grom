@@ -24,10 +24,7 @@ public class UkrainianBankSystem implements BankSystem {
     @Override
     public void transferMoney(User fromUser, User toUser, int amount) {
 
-        if (!checkWithdraw(fromUser, amount))
-            return;
-
-        if (!checkLimitOfFunding(toUser, amount))
+        if (!checkWithdraw(fromUser, amount) && !checkLimitOfFunding(toUser, amount))
             return;
 
         fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
