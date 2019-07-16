@@ -26,14 +26,15 @@ public class UkrainianBankSystem implements BankSystem {
         if (fromUser.getBank().getCurrency() != toUser.getBank().getCurrency()){
             System.out.println("Change currency...");
         }
-        else {
-            if (!checkWithdraw(fromUser, amount) && !checkLimitOfFunding(toUser, amount))
+        if (!checkWithdraw(fromUser, amount))
+            return;
+
+        if (!checkLimitOfFunding(toUser, amount))
             return;
 
         fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
 
         toUser.setBalance(toUser.getBalance() + amount);
-        }
 
     }
 
