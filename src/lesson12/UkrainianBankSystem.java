@@ -31,7 +31,8 @@ public class UkrainianBankSystem implements BankSystem {
         fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
 
         toUser.setBalance(toUser.getBalance() + amount);
-        }
+        } else
+            printCurrencyErrorMsg(fromUser, toUser);
     }
 
     @Override
@@ -61,5 +62,11 @@ public class UkrainianBankSystem implements BankSystem {
 
     private void printWihtdrawalErrorMsg(int amount, User user) {
         System.err.println("Can't withdraw money" + amount + "from use" + user.toString());
+    }
+
+    private void printCurrencyErrorMsg(User fromUser, User toUser) {
+        if (fromUser.getBank().getCurrency() == toUser.getBank().getCurrency()) {
+            System.err.println("Currency error" + fromUser.toString() + "from use" + toUser.toString());
+        }
     }
 }
