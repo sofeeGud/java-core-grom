@@ -26,14 +26,12 @@ public class UkrainianBankSystem implements BankSystem {
 
         if (!checkWithdraw(fromUser, amount))
             return;
+        fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
 
         if (!checkLimitOfFunding(toUser, amount))
             return;
 
-        fromUser.setBalance(fromUser.getBalance() - amount - amount * fromUser.getBank().getCommission(amount));
-
-        toUser.setBalance(toUser.getBalance() + amount- amount * toUser.getBank().getCommission(amount));
-
+        toUser.setBalance(toUser.getBalance() + amount); //- amount * toUser.getBank().getCommission(amount));
     }
 
     @Override

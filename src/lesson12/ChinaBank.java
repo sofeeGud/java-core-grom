@@ -24,7 +24,8 @@ public class ChinaBank extends Bank {
     public double getMonthlyRate() {
         if (getCurrency() == Currency.EUR)
             return 0.01;
-        return 0;
+        else
+            return 0;
     }
 
     @Override
