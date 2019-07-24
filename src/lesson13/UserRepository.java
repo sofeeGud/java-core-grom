@@ -2,11 +2,8 @@ package lesson13;
 
 public class UserRepository {
 
-    private User[] users;
+    private User[] users = new User[4];
 
-    public UserRepository(User[] users) {
-        this.users = users;
-    }
 
     public User[] getUsers() {
         return users;
@@ -78,43 +75,49 @@ public class UserRepository {
 
 
     public User save(User user) {
-        if (user != null && findById(user.getId()) != null && findById(user.getId()).getId() == user.getId()) {
-            return null;
-        }
-        for (int i = 0; i < users.length; i++) {
 
-            if (users[i] == null) {
-                users[i] = user;
-                return user;
-            }
-        }
-        return null;
-
-    }
-
-    public User update(User user) {
-        if (user != null && findById(user.getId()) != null && findById(user.getId()).getId() == user.getId()) {
+        if (user != null && findById(user.getId()) == null) {
             for (int i = 0; i < users.length; i++) {
 
-                if (users[i].getId() == user.getId()) {
+                if (users[i] == null) {
                     users[i] = user;
                     return user;
                 }
             }
         }
+
+
+        return null;
+
+    }
+
+    public User update(User user) {
+        if (findById(user.getId()) != null) {
+
+            User findedUser = findById(user.getId());
+
+            findedUser.setName(user.getName());
+            findedUser.setSessionId(user.getSessionId());
+
+            return findedUser;
+        }
         return null;
     }
 
     public void delete(long id) {
-        for (User newUser : users) {
-            if (newUser != null && id == newUser.getId()) {
-                for (int i = 0; i < users.length; i++) {
 
-                    if (users[i] == newUser) {
-                        users[i] = null;
-                    }
+
+        if (findById(id) != null) {
+            for (int i = 0; i < users.length; i++) {
+
+                if (users[i] != null && users[i].getId() == id) {
+                    users[i] = null;
                 }
             }
         }
+
+
     }
+
+
 }
