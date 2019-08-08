@@ -1,5 +1,7 @@
 package lesson11.homework11;
 
+import java.util.Arrays;
+
 public class Controller {
 
     private API[] apis;
@@ -80,7 +82,20 @@ public class Controller {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Controller that = (Controller) o;
 
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(apis, that.apis);
 
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(apis);
+    }
 }
