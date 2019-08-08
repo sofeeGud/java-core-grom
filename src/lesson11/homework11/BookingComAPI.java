@@ -13,8 +13,8 @@ public class BookingComAPI implements API {
         int len = 0;
         for (Room room : rooms) {
             if (room != null && (price > (room.getPrice() - 100) && price < (room.getPrice() + 100))
-                    && persons == room.getPersons() && city == room.getCityName()
-                    && hotel == room.getHotelName()) {
+                    && persons == room.getPersons() && city.equals(room.getCityName())
+                    && hotel.equals(room.getHotelName())) {
                 len++;
             }
         }
@@ -22,8 +22,8 @@ public class BookingComAPI implements API {
         int i = 0;
         for (Room room : rooms) {
             if (room != null && (price > (room.getPrice() - 100) && price < (room.getPrice() + 100))
-                    && persons == room.getPersons() && city == room.getCityName()
-                    && hotel == room.getHotelName()){
+                    && persons == room.getPersons() && city.equals(room.getCityName())
+                    && hotel.equals(room.getHotelName())){
                 roomPr[i++] = room;
             }
         }
