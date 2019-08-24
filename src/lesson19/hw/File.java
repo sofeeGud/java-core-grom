@@ -6,7 +6,7 @@ public class File {
     private String format;
     private long size;
 
-    public File(long id, String name, String format, long size) {
+    public File() {
 
         try {
             if (name.length() <= 10){
