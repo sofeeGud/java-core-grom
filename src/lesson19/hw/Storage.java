@@ -36,16 +36,18 @@ public class Storage {
         return storageSize;
     }
 
-    public File put(Storage storage, File file) throws Exception {
-        if (validation(storage, file)) ;
+    public boolean put(Storage storage, File file) throws Exception {
+
+        validation(storage, file);
+
         int len = files.length + 1;
         File[] fileNew = new File[len];
-        for (int i = 0; i < files.length; i++) {
-            fileNew[i] = files[i];
-        }
+
+        System.arraycopy(files, 0, fileNew, 0, files.length);
+
         fileNew[len - 1] = file;
         files = fileNew;
-        return file;
+        return true;
     }
 
     public boolean delete(Storage storage, File file) throws NullPointerException{
@@ -61,7 +63,6 @@ public class Storage {
     }
 
     private static boolean validation(Storage storage, File file)throws Exception{
-
 
                 if (!validateFormat(storage, file))
                     throw new Exception("Format is not correct, id= " + file.getId() + " " + storage.id);
