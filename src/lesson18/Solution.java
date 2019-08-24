@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
-        String test = "jfufy 455.58 fkdkde 5656 djffkg 2.569 ";
+        String test = "22 jfufy 455.58 fkdkde    5656 djffkg 2.569 ";
         System.out.println(Arrays.toString(parseWords(test)));
-        System.out.println(findNumbers(test));
+        System.out.println((Arrays.toString(findNumbers(test))));
     }
 
     public static String[] parseWords(String input) {
@@ -21,7 +21,7 @@ public class Solution {
                     if (!Character.isLetter(sim))
                         flag = true;
                 }
-                if ( flag )  {
+                if (flag) {
                     arr = arrayPush(arr, word);
                 }
             }
@@ -46,21 +46,28 @@ public class Solution {
 
     }
 
-   public static int[] findNumbers(String text){
-       String[] words = parseWords(text);
-       double[] numbers = new double[words.length];
-       int[] foundNum = new int[10];
+    public static int[] findNumbers(String text) {
+        String[] words = parseWords(text);
+        double[] numbers = new double[words.length];
 
-       for (String word:words){
-       for (int j = 0; j < words.length; j++) {
-           numbers[j] = Double.parseDouble(word);
-       }
-       }
-       for (int i = 0; i < words.length; i++) {
-           if (numbers[i] % 2 == 0)
-               numbers[i] = foundNum[i];
-       }
 
-       return foundNum;
-   }
+        for (int j = 0; j < words.length; j++) {
+            numbers[j] = Double.parseDouble(words[j]);
+        }
+
+        int n = 0;
+        for (int i = 0; i < words.length; i++) {
+            if (numbers[i] % 2 == 0)
+                n++;
+        }
+        int[] foundNum = new int[n];
+        int k = 0;
+        for (int i = 0; i < words.length; i++) {
+            if (numbers[i] % 2 == 0) {
+                foundNum[k++] = (int) numbers[i];
+            } else
+                System.out.println("not a number");
+        }
+        return foundNum;
+    }
 }
