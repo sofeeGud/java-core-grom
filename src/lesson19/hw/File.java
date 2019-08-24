@@ -16,6 +16,7 @@ public class File {
         }catch (Exception e){
             System.err.println(e.getMessage());
         }
+
         this.format = format;
         this.size = size;
     }
