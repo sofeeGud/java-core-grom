@@ -10,11 +10,11 @@ public class File {
         this.id = id;
         try {
             if (name.length() > 10)
-                throw new Exception("Error");
+                throw new Exception("File name is too long, id=" + id);
             else this.name = name ;
 
         }catch (Exception e){
-            System.err.println();
+            System.err.println(e.getMessage());
         }
         this.format = format;
         this.size = size;
