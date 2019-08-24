@@ -36,8 +36,8 @@ public class Storage {
         return storageSize;
     }
 
-    public boolean put(File file) {
-        if(!validation(this, file)) return false;
+    public File put(File file) {
+        if(!validation(this, file)) return null;
         int len = files.length + 1;
         File[] fileNew = new File[len];
         for (int i = 0; i < files.length; i++) {
@@ -45,7 +45,7 @@ public class Storage {
         }
         fileNew[len - 1] = file;
         files = fileNew;
-        return true;
+        return file;
     }
 
     public boolean delete(File file){
