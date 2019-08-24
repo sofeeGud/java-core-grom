@@ -8,7 +8,7 @@ public class Storage {
     private String storageCountry;
     private long storageSize;
 
-    public Storage(long id, File[] files, String[] formatsSupported, String storageCountry, long storageSize) {
+    public Storage(long id) {
         this.id = id;
         this.files = files;
         this.formatsSupported = formatsSupported;
@@ -36,8 +36,8 @@ public class Storage {
         return storageSize;
     }
 
-    public boolean put(Storage storage, File file) {
-        if(!validation(storage, file)) return false;
+    public File put(Storage storage, File file) {
+        if (validation(storage, file)) ;
         int len = files.length + 1;
         File[] fileNew = new File[len];
         for (int i = 0; i < files.length; i++) {
@@ -45,13 +45,13 @@ public class Storage {
         }
         fileNew[len - 1] = file;
         files = fileNew;
-        return true;
+        return file;
     }
 
-    public boolean delete(File file){
+    public boolean delete(Storage storage, File file) {
         if (file != null) {
             for (int i = 0; i < files.length; i++) {
-                if (files[i].getId() == file.getId()) {
+                if (files[i].getId() == file.getId() && files[i].getName() == file.getName()) {
                     files[i] = null;
                     return true;
                 }
@@ -64,13 +64,13 @@ public class Storage {
         if (file != null) {
             try {
                 if (!validateFormat(storage, file))
-                    throw new Exception("Format is not correct, id= " + file.getId() + " " +storage.id);
+                    throw new Exception("Format is not correct, id= " + file.getId() + " " + storage.id);
                 if (!validateId(storage, file))
-                    throw new Exception("Id is already in use, id= " + file.getId() + " " +storage.id);
+                    throw new Exception("Id is already in use, id= " + file.getId() + " " + storage.id);
                 if (!validateFileName(file))
-                    throw new Exception("File name is too long, id= " + file.getId() + " " +storage.id);
+                    throw new Exception("File name is too long, id= " + file.getId() + " " + storage.id);
                 if (!validateStorageSize(storage, file))
-                    throw new Exception("Not enough storage, id= " + file.getId() + " " +storage.id);
+                    throw new Exception("Not enough storage, id= " + file.getId() + " " + storage.id);
                 return true;
             } catch (Exception e) {
                 System.err.println(e.getMessage());

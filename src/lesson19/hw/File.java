@@ -11,9 +11,9 @@ public class File {
         try {
             if (name.length() > 10)
                 throw new Exception("File name is too long, id=" + id);
-            else this.name = name ;
+            else this.name = name;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
