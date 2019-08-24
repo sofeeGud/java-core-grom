@@ -2,7 +2,7 @@ package lesson19.hw;
 
 public class Controller {
 
-    public static void put(Storage storage, File file) {
+    public static void put(Storage storage, File file) throws Exception {
 
         storage.put(storage, file);
     }
