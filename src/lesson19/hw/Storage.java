@@ -36,7 +36,7 @@ public class Storage {
         return storageSize;
     }
 
-    public File put(Storage storage, File file) throws Exception {
+    public File put(Storage storage, File file){
         if (validation(storage, file)) ;
         int len = files.length + 1;
         File[] fileNew = new File[len];
@@ -60,7 +60,7 @@ public class Storage {
         return false;
     }
 
-    private static boolean validation(Storage storage, File file) throws Exception{
+    private static boolean validation(Storage storage, File file){
         if (file != null) {
             try {
                 if (!validateFormat(storage, file))
