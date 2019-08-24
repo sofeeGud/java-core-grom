@@ -16,7 +16,7 @@ public class File {
                 this.id = id;
             }
            else {
-                throw new Exception("File name is too long, id=" + id);
+                throw new Exception("Can not create file. File name is too long, id = " + id);
            }
 
     }

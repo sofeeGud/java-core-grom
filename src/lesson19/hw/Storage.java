@@ -40,13 +40,14 @@ public class Storage {
 
         validation(storage, file);
 
-        int len = files.length + 1;
-        File[] fileNew = new File[len];
+        File[] fileNew = new File[files.length + 1];
 
         System.arraycopy(files, 0, fileNew, 0, files.length);
 
-        fileNew[len - 1] = file;
+        fileNew[fileNew.length - 1] = file;
+
         files = fileNew;
+
         return true;
     }
 
@@ -65,13 +66,13 @@ public class Storage {
     private static boolean validation(Storage storage, File file)throws Exception{
 
                 if (!validateFormat(storage, file))
-                    throw new Exception("Format is not correct, id= " + file.getId() + " " + storage.id);
+                    throw new Exception("Format is not correct, id = " + file.getId() + " storage = " + storage.id);
                 if (!validateId(storage, file))
-                    throw new Exception("Id is already in use, id= " + file.getId() + " " + storage.id);
+                    throw new Exception("Id is already in use, id = " + file.getId() + " storage = " + storage.id);
                 if (!validateFileName(file))
-                    throw new Exception("File name is too long, id= " + file.getId() + " " + storage.id);
+                    throw new Exception("File name is too long, id = " + file.getId() + " storage = " + storage.id);
                 if (!validateStorageSize(storage, file))
-                    throw new Exception("Not enough storage, id= " + file.getId() + " " + storage.id);
+                    throw new Exception("Not enough storage, id = " + file.getId() + " storage = " + storage.id);
                 return true;
 
     }

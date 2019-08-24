@@ -2,7 +2,7 @@ package lesson19.hw;
 
 public class Controller {
 
-    public static boolean put(Storage storage, File file) throws Exception {
+    public boolean put(Storage storage, File file) throws Exception {
 
         storage.put(storage, file);
         return true;
@@ -12,7 +12,7 @@ public class Controller {
         return storage.delete(storage, file);
     }
 
-    public static boolean transferAll(Storage storageFrom, Storage storageTo) throws Exception {
+    public boolean transferAll(Storage storageFrom, Storage storageTo) throws Exception {
         if (storageFrom == null)
             throw new NullPointerException("StorageFrom is null.");
 
@@ -35,7 +35,7 @@ public class Controller {
         return false;
     }
 
-    public static boolean transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
+    public boolean transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
         if (storageFrom == null)
             throw new NullPointerException("StorageFrom is null.");
 
