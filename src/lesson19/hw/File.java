@@ -17,7 +17,7 @@ public class File {
             } else throw new Exception("File name is too long, id=" + id);
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            System.exit(0);
+//            System.exit(0);
         }
     }
 
