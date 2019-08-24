@@ -23,12 +23,12 @@ public class Controller {
         if (storageFrom.getFormatsSupported() != storageTo.getFormatsSupported())
             throw new Exception("Format is not correct");
 
-        long lenStorageToNew = storageFrom.getFiles().length + storageTo.getFiles().length;
-        Storage storageNewTo = new Storage(lenStorageToNew);
+        int lenStorageToNew = storageFrom.getFiles().length + storageTo.getFiles().length;
+        Storage[] storageNewTo = new Storage[lenStorageToNew];
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             delete(storageFrom, storageFrom.getFiles()[i]);
-            put(storageNewTo, storageFrom.getFiles()[i]);
-            storageNewTo.getFiles()[i - 1] = storageTo.getFiles()[i];
+            storageNewTo[i].getFiles()[i] = storageTo.getFiles()[i];
+            put(storageTo, storageFrom.getFiles()[i]);
         }
     }
 
