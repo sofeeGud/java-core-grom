@@ -8,7 +8,14 @@ public class File {
 
     public File(long id, String name, String format, long size) {
         this.id = id;
-        this.name = name;
+        try {
+            if (name.length() > 10)
+                throw new Exception("Error");
+            else this.name = name ;
+
+        }catch (Exception e){
+            System.err.println();
+        }
         this.format = format;
         this.size = size;
     }
