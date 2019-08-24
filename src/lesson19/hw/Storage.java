@@ -36,7 +36,7 @@ public class Storage {
         return storageSize;
     }
 
-    public File put(Storage storage, File file) throws Exception {
+    public boolean put(Storage storage, File file) throws Exception {
 
         validation(storage, file);
 
@@ -48,7 +48,7 @@ public class Storage {
 
         files = fileNew;
 
-        return file;
+        return true;
     }
 
     public boolean delete(Storage storage, File file) throws NullPointerException{
@@ -64,7 +64,8 @@ public class Storage {
     }
 
     private static boolean validation(Storage storage, File file)throws Exception{
-
+                if (file == null)
+                    throw new Exception("Missing object"+ "storage = " + storage.id);
                 if (!validateFormat(storage, file))
                     throw new Exception("Format is not correct, id = " + file.getId() + " storage = " + storage.id);
                 if (!validateId(storage, file))

@@ -2,7 +2,7 @@ package lesson19.hw;
 
 public class Controller {
 
-    public File put(Storage storage, File file) throws Exception {
+    public boolean put(Storage storage, File file) throws Exception {
 
         return storage.put(storage, file);
 
