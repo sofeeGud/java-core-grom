@@ -36,8 +36,11 @@ public class Storage {
         return storageSize;
     }
 
-    public File put(Storage storage, File file) {
-        if (validation(storage, file)) ;
+    public File put(Storage storage, File file) throws NullPointerException{
+        if (file != null)
+            throw new NullPointerException("File is not found");
+
+        if (!validation(storage, file)) ;
         int len = files.length + 1;
         File[] fileNew = new File[len];
         for (int i = 0; i < files.length; i++) {
@@ -48,16 +51,16 @@ public class Storage {
         return file;
     }
 
-    public boolean delete(Storage storage, File file) {
-        if (file != null) {
-            for (int i = 0; i < files.length; i++) {
+    public File delete(Storage storage, File file) throws NullPointerException{
+        if (file != null)
+            throw new NullPointerException("File is not found");
+
+        for (int i = 0; i < files.length; i++) {
                 if (files[i].getId() == file.getId() && files[i].getName() == file.getName()) {
                     files[i] = null;
-                    return true;
                 }
             }
-        }
-        return false;
+        return file;
     }
 
     private static boolean validation(Storage storage, File file) {

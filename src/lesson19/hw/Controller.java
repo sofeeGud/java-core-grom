@@ -11,7 +11,7 @@ public class Controller {
         return storage.delete(storage, file);
     }
 
-    public static void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
+    public static boolean transferAll(Storage storageFrom, Storage storageTo) throws Exception {
         if (storageFrom == null)
             throw new NullPointerException("StorageFrom is null.");
 
@@ -29,10 +29,12 @@ public class Controller {
             delete(storageFrom, storageFrom.getFiles()[i]);
             storageNewTo[i].getFiles()[i] = storageTo.getFiles()[i];
             put(storageTo, storageFrom.getFiles()[i]);
+            return true;
         }
+        return false;
     }
 
-    public void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
+    public static boolean transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
         if (storageFrom == null)
             throw new NullPointerException("StorageFrom is null.");
 
@@ -58,6 +60,7 @@ public class Controller {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
 }
