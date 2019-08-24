@@ -36,7 +36,7 @@ public class Storage {
         return storageSize;
     }
 
-    public File put(Storage storage, File file) {
+    public File put(Storage storage, File file) throws Exception {
         if (validation(storage, file)) ;
         int len = files.length + 1;
         File[] fileNew = new File[len];
@@ -70,7 +70,7 @@ public class Storage {
                 if (!validateFileName(file))
                     throw new Exception("File name is too long, id= " + file.getId() + " " + storage.id);
                 if (!validateStorageSize(storage, file))
-                    throw new NullPointerException("Not enough storage, id= " + file.getId() + " " + storage.id);
+                    throw new Exception("Not enough storage, id= " + file.getId() + " " + storage.id);
                 return true;
             } catch (Exception e) {
                 System.err.println(e.getMessage());
