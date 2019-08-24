@@ -6,19 +6,19 @@ public class File {
     private String format;
     private long size;
 
-    public File(long id, String name, String format, long size) {
+    public File(long id, String name, String format, long size)throws Exception {
 
-        try {
-            if (name.length() <= 10){
+
+            if (name.length() <= 10) {
                 this.name = name;
                 this.format = format;
                 this.size = size;
                 this.id = id;
-            } else throw new Exception("File name is too long, id=" + id);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-//            System.exit(0);
-        }
+            }
+           else {
+                throw new Exception("File name is too long, id=" + id);
+           }
+
     }
 
     public long getId() {
