@@ -7,7 +7,7 @@ public class Controller {
         return storage.put(storage, file);
     }
 
-    public static File delete(Storage storage, File file) {
+    public static boolean delete(Storage storage, File file) {
         return storage.delete(storage, file);
     }
 
