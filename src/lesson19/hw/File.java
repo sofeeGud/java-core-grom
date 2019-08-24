@@ -36,4 +36,14 @@ public class File {
     public long getSize() {
         return size;
     }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", format='" + format + '\'' +
+                ", size=" + size +
+                '}';
+    }
 }

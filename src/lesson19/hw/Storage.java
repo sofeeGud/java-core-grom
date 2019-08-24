@@ -1,5 +1,7 @@
 package lesson19.hw;
 
+import java.util.Arrays;
+
 public class Storage {
 
     private long id;
@@ -34,6 +36,17 @@ public class Storage {
 
     public long getStorageSize() {
         return storageSize;
+    }
+
+    @Override
+    public String toString() {
+        return "Storage{\n" +
+                " id=" + id +
+                ",\n files=" + Arrays.toString(files) +
+                ",\n formatsSupported=" + Arrays.toString(formatsSupported) +
+                ",\n storageCountry='" + storageCountry + '\'' +
+                ",\n storageSize=" + storageSize +
+                '}';
     }
 
     public boolean put(Storage storage, File file) throws Exception {
@@ -104,7 +117,7 @@ public class Storage {
         for (File fileSize : storage.getFiles()) {
             sumSize += fileSize.getSize();
         }
-        return sumSize + file.getSize() <= storage.getStorageSize();
+        return (sumSize + file.getSize() <= storage.getStorageSize());
     }
 
 }

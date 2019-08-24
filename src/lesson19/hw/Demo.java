@@ -29,7 +29,10 @@ public class Demo {
 
             Controller controller = new Controller();
 
-            controller.put(storage_1, file_8);
+            controller.put(storage_1, file_6);
+            controller.put(storage_1, file_7);
+
+            System.out.println(storage_1.toString());
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
