@@ -7,18 +7,17 @@ public class File {
     private long size;
 
     public File(long id, String name, String format, long size) {
-        this.id = id;
-        try {
-            if (name.length() > 10)
-                throw new Exception("File name is too long, id=" + id);
-            else this.name = name;
 
+        try {
+            if (name.length() <= 10){
+                this.name = name;
+                this.format = format;
+                this.size = size;
+                this.id = id;
+            } else throw new Exception("File name is too long, id=" + id);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-
-        this.format = format;
-        this.size = size;
     }
 
     public long getId() {
