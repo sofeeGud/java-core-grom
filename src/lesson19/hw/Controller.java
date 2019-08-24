@@ -2,10 +2,10 @@ package lesson19.hw;
 
 public class Controller {
 
-    public boolean put(Storage storage, File file) throws Exception {
+    public File put(Storage storage, File file) throws Exception {
 
-        storage.put(storage, file);
-        return true;
+        return storage.put(storage, file);
+
     }
 
     public static boolean delete(Storage storage, File file) {

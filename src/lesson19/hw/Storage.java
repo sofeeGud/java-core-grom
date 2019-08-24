@@ -36,7 +36,7 @@ public class Storage {
         return storageSize;
     }
 
-    public boolean put(Storage storage, File file) throws Exception {
+    public File put(Storage storage, File file) throws Exception {
 
         validation(storage, file);
 
@@ -48,7 +48,7 @@ public class Storage {
 
         files = fileNew;
 
-        return true;
+        return file;
     }
 
     public boolean delete(Storage storage, File file) throws NullPointerException{
