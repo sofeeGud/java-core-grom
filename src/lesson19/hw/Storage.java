@@ -36,7 +36,7 @@ public class Storage {
         return storageSize;
     }
 
-    public File put(File file) {
+    public File[] put(File file) {
         if(!validation(this, file)) return null;
         int len = files.length + 1;
         File[] fileNew = new File[len];
@@ -45,7 +45,7 @@ public class Storage {
         }
         fileNew[len - 1] = file;
         files = fileNew;
-        return file;
+        return files;
     }
 
     public boolean delete(File file){

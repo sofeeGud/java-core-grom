@@ -2,7 +2,7 @@ package lesson19.hw;
 
 public class Controller {
 
-    public static File put(Storage storage, File file){
+    public static File[] put(Storage storage, File file){
 
         return storage.put(file);
     }
