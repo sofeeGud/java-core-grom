@@ -44,6 +44,7 @@ public class Controller {
         if (storageFrom.getFormatsSupported() != storageTo.getFormatsSupported())
             throw new Exception("Format is not correct");
 
+
         File fileTransfer = null;
         for (File findFile : storageFrom.getFiles()) {
             if (findFile != null) {

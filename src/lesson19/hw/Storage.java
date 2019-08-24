@@ -60,7 +60,7 @@ public class Storage {
         return false;
     }
 
-    private static boolean validation(Storage storage, File file) {
+    private static boolean validation(Storage storage, File file) throws Exception{
         if (file != null) {
             try {
                 if (!validateFormat(storage, file))
@@ -70,7 +70,7 @@ public class Storage {
                 if (!validateFileName(file))
                     throw new Exception("File name is too long, id= " + file.getId() + " " + storage.id);
                 if (!validateStorageSize(storage, file))
-                    throw new Exception("Not enough storage, id= " + file.getId() + " " + storage.id);
+                    throw new NullPointerException("Not enough storage, id= " + file.getId() + " " + storage.id);
                 return true;
             } catch (Exception e) {
                 System.err.println(e.getMessage());
