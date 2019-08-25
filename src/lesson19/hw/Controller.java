@@ -2,9 +2,10 @@ package lesson19.hw;
 
 public class Controller {
 
-    public void put(Storage storage, File file) throws Exception {
+    public Storage put(Storage storage, File file) throws Exception {
 
         storage.put(file);
+        return storage;
 
     }
 
