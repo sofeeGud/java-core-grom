@@ -49,9 +49,9 @@ public class Storage {
                 '}';
     }
 
-    public boolean put(Storage storage, File file) throws Exception {
+    public boolean put(File file) throws Exception {
 
-        validation(storage, file);
+        validation(file);
 
         File[] fileNew = new File[files.length + 1];
 
@@ -76,31 +76,31 @@ public class Storage {
         return false;
     }
 
-    private static boolean validation(Storage storage, File file)throws Exception{
+    private boolean validation(File file)throws Exception{
                 if (file == null)
-                    throw new Exception("Missing object"+ "storage = " + storage.id);
-                if (!validateFormat(storage, file))
-                    throw new Exception("Format is not correct, id = " + file.getId() + " storage = " + storage.id);
-                if (!validateId(storage, file))
-                    throw new Exception("Id is already in use, id = " + file.getId() + " storage = " + storage.id);
+                    throw new Exception("Missing object"+ " storage = " + id);
+                if (!validateFormat(file))
+                    throw new Exception("Format is not correct, id = " + file.getId() + " storage = " + id);
+                if (!validateId(file))
+                    throw new Exception("Id is already in use, id = " + file.getId() + " storage = " + id);
                 if (!validateFileName(file))
-                    throw new Exception("File name is too long, id = " + file.getId() + " storage = " + storage.id);
-                if (!validateStorageSize(storage, file))
-                    throw new Exception("Not enough storage, id = " + file.getId() + " storage = " + storage.id);
+                    throw new Exception("File name is too long, id = " + file.getId() + " storage = " + id);
+                if (!validateStorageSize(file))
+                    throw new Exception("Not enough storage, id = " + file.getId() + " storage = " + id);
                 return true;
 
     }
 
-    private static boolean validateFormat(Storage storage, File file) {
-        for (String storageFormat : storage.getFormatsSupported()) {
+    private boolean validateFormat(File file) {
+        for (String storageFormat : getFormatsSupported()) {
             if (file.getFormat().equals(storageFormat))
                 return true;
         }
         return false;
     }
 
-    private static boolean validateId(Storage storage, File file) {
-        for (File fileFind : storage.getFiles()) {
+    private boolean validateId(File file) {
+        for (File fileFind : getFiles()) {
             if (file.getId() == fileFind.getId())
                 return false;
         }
@@ -112,12 +112,12 @@ public class Storage {
         return file.getName().length() <= 10;
     }
 
-    private static boolean validateStorageSize(Storage storage, File file) {
+    private boolean validateStorageSize(File file) {
         long sumSize = 0;
-        for (File fileSize : storage.getFiles()) {
+        for (File fileSize : getFiles()) {
             sumSize += fileSize.getSize();
         }
-        return (sumSize + file.getSize() <= storage.getStorageSize());
+        return (sumSize + file.getSize() <= getStorageSize());
     }
 
 }

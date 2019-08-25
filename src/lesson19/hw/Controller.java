@@ -4,7 +4,7 @@ public class Controller {
 
     public boolean put(Storage storage, File file) throws Exception {
 
-        return storage.put(storage, file);
+        return storage.put(file);
 
     }
 
