@@ -49,22 +49,24 @@ public class Storage {
                 '}';
     }
 
-    public boolean put(File file) throws Exception {
-        boolean flag = false;
-        if (file !=null){
-            if (files !=null && validation(file)) {
+    public static File put(Storage storage, File file) throws Exception {
+        if (file == null) {
+            throw new Exception("File is null");
+        }
+        if (storage == null) {
+            throw new Exception("Storage is null");
+        }
 
-                for (int i = 0; i < files.length; i++)
-                    if (files[i] == null) {
-                        files[i] = file;
-                        flag = true;
-                        break;
-                    }
+        validation (storage, file);
+
+        for (int i = 0; i < storage.getFiles().length; i++) {
+            if (storage.getFiles()[i] == null) {
+                storage.getFiles()[i] = file;
+                break;
             }
         }
-        return flag;
+        return file;
     }
-
     public boolean delete(Storage storage, File file) throws NullPointerException{
         if (file != null) {
             for (int i = 0; i < files.length; i++) {
@@ -77,31 +79,31 @@ public class Storage {
         return false;
     }
 
-    private boolean validation(File file)throws Exception{
+    private static boolean validation(Storage storage, File file)throws Exception{
                 if (file == null)
-                    throw new Exception("Missing object"+ " storage = " + id);
-                if (!validateFormat(file))
-                    throw new Exception("Format is not correct, id = " + file.getId() + " storage = " + id);
-                if (!validateId(file))
-                    throw new Exception("Id is already in use, id = " + file.getId() + " storage = " + id);
+                    throw new Exception("Missing object"+ " storage = " + storage.getId());
+                if (!validateFormat(storage, file))
+                    throw new Exception("Format is not correct, id = " + file.getId() + " storage = " + storage.getId());
+                if (!validateId(storage, file))
+                    throw new Exception("Id is already in use, id = " + file.getId() + " storage = " + storage.getId());
                 if (!validateFileName(file))
-                    throw new Exception("File name is too long, id = " + file.getId() + " storage = " + id);
-                if (!validateStorageSize(file))
-                    throw new Exception("Not enough storage, id = " + file.getId() + " storage = " + id);
+                    throw new Exception("File name is too long, id = " + file.getId() + " storage = " + storage.getId());
+                if (!validateStorageSize(storage, file))
+                    throw new Exception("Not enough storage, id = " + file.getId() + " storage = " + storage.getId());
                 return true;
 
     }
 
-    private boolean validateFormat(File file) {
-        for (String storageFormat : getFormatsSupported()) {
-            if (file.getFormat().equals(storageFormat))
+    private static boolean validateFormat(Storage storage, File file) {
+        for (String storageFormat : storage.getFormatsSupported()) {
+            if (storageFormat.equals(file.getFormat()))
                 return true;
         }
         return false;
     }
 
-    private boolean validateId(File file) {
-        for (File fileFind : getFiles()) {
+    private static boolean validateId(Storage storage, File file) {
+        for (File fileFind : storage.getFiles()) {
             if (file.getId() == fileFind.getId())
                 return false;
         }
@@ -113,12 +115,12 @@ public class Storage {
         return file.getName().length() <= 10;
     }
 
-    private boolean validateStorageSize(File file) {
+    private static boolean validateStorageSize(Storage storage, File file) {
         long sumSize = 0;
-        for (File fileSize : getFiles()) {
+        for (File fileSize : storage.getFiles()) {
             sumSize += fileSize.getSize();
         }
-        return (sumSize + file.getSize() <= getStorageSize());
+        return (sumSize + file.getSize() <= storage.getStorageSize());
     }
 
 }

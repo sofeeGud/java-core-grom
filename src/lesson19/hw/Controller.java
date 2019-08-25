@@ -3,14 +3,8 @@ package lesson19.hw;
 public class Controller {
 
     public void put(Storage storage, File file) throws Exception{
-        if (storage != null && file != null) {
-            try {
-                storage.put(file);
-            } catch (Exception e) {
-                System.out.println("Can't put, " + " " + file.getId());
-                throw new Exception(e.getMessage());
-            }
-        }
+
+        storage.put(storage, file);
         }
 
     public static boolean delete(Storage storage, File file) {
