@@ -2,9 +2,9 @@ package lesson19.hw;
 
 public class Controller {
 
-    public Storage put(Storage storage, File file) throws Exception {
-        if (storage == null)
-            throw new NullPointerException("StorageFrom is null.");
+    public Storage put(Storage storage, File file) throws Exception{
+        if (storage == null || file == null)
+            throw new Exception("StorageFrom is null.");
 
         storage.put(file);
         return storage;
