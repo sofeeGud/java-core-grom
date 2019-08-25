@@ -44,13 +44,16 @@ public class File {
 
         File file1 = (File) o;
 
+        if (!name.equals(file1.name)) return false;
         return format.equals(file1.format);
 
     }
 
     @Override
     public int hashCode() {
-        return format.hashCode();
+        int result = name.hashCode();
+        result = 31 * result + format.hashCode();
+        return result;
     }
 
     @Override
