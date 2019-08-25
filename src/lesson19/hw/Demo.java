@@ -20,7 +20,7 @@ public class Demo {
                     file_1,
                     file_2,
                     file_3,
-                    file_4,
+                    file_4
             };
 
             String[] formats = new String[]{"doc", "rtf"};
@@ -30,6 +30,7 @@ public class Demo {
             Controller controller = new Controller();
 
             controller.put(storage_1, file_6);
+            controller.delete (storage_1, file_4);
             //controller.put(storage_1, file_7);
 
             System.out.println(storage_1.toString());

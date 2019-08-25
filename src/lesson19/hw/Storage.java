@@ -50,13 +50,10 @@ public class Storage {
     }
 
     public static File put(Storage storage, File file) throws Exception {
-        if (file == null) {
+        if (file == null)
             throw new Exception("File is null");
-        }
-        if (storage == null) {
-            throw new Exception("Storage is null");
-        }
 
+        //validateNull(storage);
         validation (storage, file);
 
         for (int i = 0; i < storage.getFiles().length; i++) {
@@ -67,21 +64,22 @@ public class Storage {
         }
         return file;
     }
-    public boolean delete(Storage storage, File file) throws NullPointerException{
-        if (file != null) {
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].getId() == file.getId() && files[i].getName() == file.getName()) {
-                    files[i] = null;
-                    return true;
-                }
+
+    public static File delete(Storage storage, File file) throws Exception{
+        if (file == null)
+            throw new Exception("File is null");
+
+        for (int i = 0; i < storage.getFiles().length; i++) {
+            if (file.equals(storage.getFiles()[i])) {
+                storage.getFiles()[i+1] = null;
+                return file;
             }
         }
-        return false;
+        throw new Exception("File id= " + file.getId() + " is not found in storage id=  " + storage.getId());
+
     }
 
     private static boolean validation(Storage storage, File file)throws Exception{
-                if (file == null)
-                    throw new Exception("Missing object"+ " storage = " + storage.getId());
                 if (!validateFormat(storage, file))
                     throw new Exception("Format is not correct, id = " + file.getId() + " storage = " + storage.getId());
                 if (!validateId(storage, file))
@@ -122,5 +120,16 @@ public class Storage {
         }
         return (sumSize + file.getSize() <= storage.getStorageSize());
     }
+
+    private static void validateNull(Storage storage) throws Exception {
+        for (File storageFile : storage.getFiles()) {
+            if (storageFile == null) {
+                return;
+
+            }
+        }
+        throw new Exception("In storage id= " +storage.getId() + " have not cell");
+    }
+
 
 }
