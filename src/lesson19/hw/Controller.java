@@ -2,14 +2,16 @@ package lesson19.hw;
 
 public class Controller {
 
-    public Storage put(Storage storage, File file) throws Exception{
-        if (storage == null || file == null)
-            throw new Exception("StorageFrom is null.");
-
-        storage.put(file);
-        return storage;
-
-    }
+    public void put(Storage storage, File file) throws Exception{
+        if (storage != null && file != null) {
+            try {
+                storage.put(file);
+            } catch (Exception e) {
+                System.out.println("Can't put, " + " " + file.getId());
+                throw new Exception(e.getMessage());
+            }
+        }
+        }
 
     public static boolean delete(Storage storage, File file) {
         return storage.delete(storage, file);

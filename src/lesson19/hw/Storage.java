@@ -50,18 +50,19 @@ public class Storage {
     }
 
     public boolean put(File file) throws Exception {
+        boolean flag = false;
+        if (file !=null){
+            if (files !=null && validation(file)) {
 
-        validation(file);
-
-        File[] fileNew = new File[files.length + 1];
-
-        System.arraycopy(files, 0, fileNew, 0, files.length);
-
-        fileNew[fileNew.length - 1] = file;
-
-        files = fileNew;
-
-        return true;
+                for (int i = 0; i < files.length; i++)
+                    if (files[i] == null) {
+                        files[i] = file;
+                        flag = true;
+                        break;
+                    }
+            }
+        }
+        return flag;
     }
 
     public boolean delete(Storage storage, File file) throws NullPointerException{
