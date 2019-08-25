@@ -38,6 +38,22 @@ public class File {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        File file1 = (File) o;
+
+        return format.equals(file1.format);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return format.hashCode();
+    }
+
+    @Override
     public String toString() {
         return "File{" +
                 "id=" + id +

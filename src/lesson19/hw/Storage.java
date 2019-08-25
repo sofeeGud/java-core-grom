@@ -93,7 +93,7 @@ public class Storage {
 
     private static boolean validateFormat(Storage storage, File file) {
         for (String storageFormat : storage.getFormatsSupported()) {
-            if (file.getFormat() == storageFormat)
+            if (file.getFormat().equals(storageFormat))
                 return true;
         }
         return false;
