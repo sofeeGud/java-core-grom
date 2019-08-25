@@ -33,7 +33,7 @@ public class Controller {
         }
     }
 
-    public void transferAll(Storage storageFrom, Storage storageTo) throws Exception{
+    public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
         long sizeFrom = 0;
         for (File fileFrom : storageFrom.getFiles()) {
             findById(storageTo, fileFrom.getId());
@@ -45,8 +45,8 @@ public class Controller {
         validatePlaceStorageTo(storageTo, storageFrom.getFiles().length);
         validateStorageSize(storageTo, sizeFrom);
 
-        for (File fileFrom : storageFrom.getFiles()){
-            if (fileFrom != null){
+        for (File fileFrom : storageFrom.getFiles()) {
+            if (fileFrom != null) {
                 delete(storageFrom, fileFrom);
                 put(storageTo, fileFrom);
             }
