@@ -9,7 +9,7 @@ public class File {
     public File(long id, String name, String format, long size)throws Exception {
 
 
-            if (name.length() <= 10) {
+            if ((name.length() <= 10) && name !=null) {
                 this.name = name;
                 this.format = format;
                 this.size = size;

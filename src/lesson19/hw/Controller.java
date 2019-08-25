@@ -18,22 +18,20 @@ public class Controller {
 
         if (storageTo == null)
             throw new NullPointerException("StorageTo is null.");
-        if (storageFrom.getStorageSize() >= storageTo.getStorageSize())
-            throw new Exception("Not enough storage");
+
 
         if (storageFrom.getFormatsSupported() != storageTo.getFormatsSupported())
             throw new Exception("Format is not correct");
 
-        int lenStorageToNew = storageFrom.getFiles().length + storageTo.getFiles().length;
-        Storage[] storageNewTo = new Storage[lenStorageToNew];
-        for (int i = 0; i < storageFrom.getFiles().length; i++) {
-            delete(storageFrom, storageFrom.getFiles()[i]);
-            storageNewTo[i].getFiles()[i] = storageTo.getFiles()[i];
-            put(storageTo, storageFrom.getFiles()[i]);
+        if (storageFrom.getStorageSize() >= storageTo.getStorageSize())
+            throw new Exception("Not enough storage");
+
+        for (File file : storageFrom.getFiles()){
+            put(storageTo, file);
+            delete(storageFrom, file);
+        }
             return true;
         }
-        return false;
-    }
 
     public boolean transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
         if (storageFrom == null)
@@ -51,18 +49,20 @@ public class Controller {
             if (findFile != null) {
                 if (findFile.getId() == id) {
                     fileTransfer = findFile;
-                } else throw new Exception("File '" + id + "' is not found in Storage '" + storageFrom.getId() + "'.");
+                } else throw new Exception("File " + id + " is not found in Storage " + storageFrom.getId());
 
             }
         }
-
-        try {
-            put(storageTo, fileTransfer);
-            delete(storageFrom, fileTransfer);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        if (storageTo.getStorageSize() + fileTransfer.getSize() >= storageTo.getStorageSize()) {
+            try {
+                put(storageTo, fileTransfer);
+                delete(storageFrom, fileTransfer);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            return false;
         }
-        return false;
+        return true;
     }
 
 }

@@ -5,7 +5,7 @@ public class Demo {
 
         try{
             File file_1 = new File(1, "name_1", "doc", 1);
-            File file_2 = new File(2, "name_2", "doc", 1);
+            File file_2 = new File(2, null, "doc", 1);
             File file_3 = new File(3, "name_3", "rtf", 1);
             File file_4 = new File(4, "name_4", "rtf", 1);
             File file_5 = new File(5, "name_5", "doc", 1);
@@ -25,7 +25,7 @@ public class Demo {
 
             String[] formats = new String[]{"doc", "rtf"};
 
-            Storage storage_1 = new Storage(1, files, formats, "Ukraine", 5);
+            Storage storage_1 = new Storage(1, files, formats, "Ukraine", 55);
 
             Controller controller = new Controller();
 
