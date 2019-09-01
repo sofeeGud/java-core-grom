@@ -19,15 +19,15 @@ public class Demo {
 
         try {
             System.out.println(controller.save(new Transaction(3, "Lvov", 100, "333", TransactionType.INCOME, new Date())).getId());
-            System.out.println(Arrays.toString(controller.transactionList()));
-            System.out.println(Arrays.toString(controller.transactionList("Odessa")));
-            System.out.println(Arrays.toString(controller.transactionList(10)));
 
         } catch (BadRequestException e) {
             System.out.println(e.getMessage());
         } catch (InternalServerException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println(Arrays.toString(controller.transactionList()));
+        System.out.println(Arrays.toString(controller.transactionList("Odessa")));
+        System.out.println(Arrays.toString(controller.transactionList(10)));
 
     }
 }
