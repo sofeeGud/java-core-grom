@@ -8,7 +8,7 @@ public class Controller {
 
     private TransactionDAO transactionDAO = new TransactionDAO();
 
-    public Transaction save(Transaction transaction) throws InternalServerException, BadRequestException {
+    public Transaction save(Transaction transaction) throws Exception {
         return transactionDAO.save(transaction);
 
     }

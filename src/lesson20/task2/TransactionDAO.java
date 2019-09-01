@@ -11,17 +11,17 @@ public class TransactionDAO {
     private Transaction[] transactions = new Transaction[10];
     private Utils utils = new Utils();
 
-    public Transaction save(Transaction transaction) throws BadRequestException, InternalServerException {
+    public Transaction save(Transaction transaction) throws Exception{
 
         validate(transaction);
 
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] == null) {
                 transactions[i] = transaction;
-                break;
+                return transactions[i];
             }
         }
-        return transaction;
+        throw new InternalServerException("No free space for transaction " + transaction.getId());
     }
 
     private void validate(Transaction transaction) throws BadRequestException, InternalServerException {
@@ -54,12 +54,12 @@ public class TransactionDAO {
         if (!flagCity)
             throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
 
-        boolean flagFreeSpace = false;
+        int countTr = 0;
         for (Transaction tr : transactions)
-            if (tr == null)
-                flagFreeSpace = true;
+            if (tr != null)
+                countTr++;
 
-        if (!flagFreeSpace)
+        if (countTr >= transactions.length)
             throw new InternalServerException("No free space for transaction " + transaction.getId());
 
         for (Transaction tr : transactions)

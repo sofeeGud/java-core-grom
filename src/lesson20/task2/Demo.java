@@ -25,6 +25,7 @@ public class Demo {
         } catch (InternalServerException e) {
             System.out.println(e.getMessage());
         }
+
         System.out.println(Arrays.toString(controller.transactionList()));
         System.out.println(Arrays.toString(controller.transactionList("Odessa")));
         System.out.println(Arrays.toString(controller.transactionList(10)));
