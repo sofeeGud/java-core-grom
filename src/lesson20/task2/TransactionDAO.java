@@ -24,54 +24,50 @@ public class TransactionDAO {
         throw new InternalServerException("No free space for transaction " + transaction.getId());
     }
 
+    private void validate(Transaction transaction) throws BadRequestException, InternalServerException {
 
-    private void validate(Transaction transaction) throws InternalServerException, BadRequestException {
-
-        /*сумма транзакции больше указанного лимита +
-        - сумма транзакций за день больше дневного лимита +
-        - количество транзакций за день больше указанного лимита +
-        - если город оплаты (совершения транзакции) не разрешен +
-        - нет места + */
+        if(transaction==null)
+            throw new BadRequestException("Transaction can't be null");
 
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
-            throw new LimitExceeded("Transaction limit exceeded " + transaction.getId() + ". Can't be saved");
+            throw new LimitExceeded("Transaction limit  exceed " + transaction.getId() + ". Can't be saved");
 
-        int sum = 0;
+        long sum = 0;
         int count = 0;
         for (Transaction tr : getTransactionsPerDay(transaction.getDateCreated())) {
             sum += tr.getAmount();
             count++;
         }
-            if (sum > utils.getLimitTransactionsPerDayAmount())
-                throw new LimitExceeded("Transaction limit per day amount exceeded " + transaction.getId() + ". Can't be saved");
+
+        if (sum + transaction.getAmount()> utils.getLimitTransactionsPerDayAmount())
+            throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
+
+        if (count  >= utils.getLimitTransactionsPerDayCount())
+            throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
+
+        boolean flagCity = false;
+        for (String city : utils.getCities()) {
+            if (city == transaction.getCity())
+                flagCity = true;
+        }
+
+        if (!flagCity)
+            throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
+
+        boolean flagFreeSpace = false;
+        for (Transaction tr : transactions)
+            if (tr == null)
+                flagFreeSpace = true;
+
+        if (!flagFreeSpace)
+            throw new InternalServerException("No free space for transaction " + transaction.getId());
+
+        for (Transaction tr : transactions)
+            if (tr != null && tr.equals(transaction))
+                throw new BadRequestException("Transaction already exist id: " + transaction.getId());
 
 
-            if (count > utils.getLimitTransactionsPerDayCount())
-                throw new LimitExceeded("Transaction limit per day count exceeded " + transaction.getId() + ". Can't be saved");
-
-            boolean flagCity = false;
-            for (String city : utils.getCities()) {
-                if (city == transaction.getCity())
-                    flagCity = true;
-            }
-
-            if (!flagCity)
-                throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
-
-            boolean flagFreeSpace = false;
-            for (Transaction tr1 : transactions)
-                if (tr1 == null)
-                    flagFreeSpace = true;
-
-            if (!flagFreeSpace)
-                throw new InternalServerException("No free space for transaction " + transaction.getId());
-
-            for (Transaction tr2 : transactions)
-                if (tr2 != null && tr2.equals(transaction))
-                    throw new InternalServerException("No free space for transaction " + transaction.getId());
     }
-
-
         public Transaction[] transactionList () {
 
             int len = 0;
