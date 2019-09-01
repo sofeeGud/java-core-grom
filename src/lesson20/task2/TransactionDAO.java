@@ -18,16 +18,16 @@ public class TransactionDAO {
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] == null) {
                 transactions[i] = transaction;
-                return transactions[i];
+                break;
             }
         }
-        throw new InternalServerException("No free space for transaction " + transaction.getId());
+        return transaction;
     }
 
     private void validate(Transaction transaction) throws BadRequestException, InternalServerException {
 
         if (transaction == null)
-            throw new BadRequestException("transaction can't be null");
+            throw new BadRequestException("Transaction can't be null");
 
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit  exceed " + transaction.getId() + ". Can't be saved");
