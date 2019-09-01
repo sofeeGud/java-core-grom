@@ -4,7 +4,7 @@ public class Utils {
 
    private int limitTransactionsPerDayCount = 10;
     private int limitTransactionsPerDayAmount = 100;
-    private int limitSimpleTransactionAmount = 40;
+    private int limitSimpleTransactionsAmount = 40;
     private String[] cities = {"Kiev", "Odessa"};
 
     public int getLimitTransactionsPerDayCount() {
@@ -15,8 +15,8 @@ public class Utils {
         return limitTransactionsPerDayAmount;
     }
 
-    public int getLimitSimpleTransactionAmount() {
-        return limitSimpleTransactionAmount;
+    public int getLimitSimpleTransactionsAmount() {
+        return limitSimpleTransactionsAmount;
     }
 
     public String[] getCities() {
