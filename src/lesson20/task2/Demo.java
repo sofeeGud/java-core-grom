@@ -9,19 +9,24 @@ import java.util.Date;
 
 public class Demo {
     public static void main(String[] args) {
-        Transaction transaction0 = new Transaction(0, "Kiev", 10, "nnn", TransactionType.INCOME, new Date());
-        Transaction transaction1 = new Transaction(1, "Poltava", 15, "nnn", TransactionType.INCOME, new Date());
-        Transaction transaction2 = new Transaction(2, "Odessa", 105, "nnn", TransactionType.INCOME, new Date());
-        Transaction[] list = {transaction0, transaction1, transaction2, null};
-        Controller controller = new Controller();
-        try {controller.save(transaction0) ;
-            //Transaction transaction0 = new Transaction(0, "Kiev", 10, "nnn", TransactionType.INCOME, new Date());
 
-        } catch (Exception e){
-            System.out.println("error");}
-        System.out.println(Arrays.toString(controller.transactionList("Kiev")));
-        System.out.println(Arrays.toString(controller.transactionList(10)));
-        System.out.println(Arrays.toString(controller.transactionList()));
+        Transaction[] list = new Transaction[5];
+        Transaction transaction0 = new Transaction(0, "Kiev", 5, "111", TransactionType.INCOME, new Date());
+        Transaction transaction1 = new Transaction(1, "Odessa", 12, "222", TransactionType.INCOME, new Date());
+        Transaction transaction2 = new Transaction(2, "Lvov", 10, "333", TransactionType.INCOME, new Date());
+        Controller controller = new Controller();
+
+        try {
+            System.out.println(controller.save( new Transaction(3, "Lvov", 100, "333", TransactionType.INCOME, new Date())).getId());
+            System.out.println(Arrays.toString(controller.transactionList()));
+            System.out.println(Arrays.toString(controller.transactionList("Odessa")));
+            System.out.println(Arrays.toString(controller.transactionList(10)));
+
+        } catch (BadRequestException e) {
+            System.out.println(e.getMessage());
+        } catch (InternalServerException e) {
+            System.out.println(e.getMessage());
+        }
 
 
     }

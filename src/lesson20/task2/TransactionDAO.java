@@ -15,19 +15,17 @@ public class TransactionDAO {
 
         validate(transaction);
 
-        int i = 0;
-        for (Transaction tr : transactions) {
-            if (tr == null) {
+        for (int i= 0;i< transactions.length;i++){
+            if (transactions[i] == null) {
                 transactions[i] = transaction;
                 return transactions[i];
             }
-            i++;
         }
         throw new InternalServerException("No free space for transaction " + transaction.getId());
     }
 
 
-    private boolean validate(Transaction transaction) throws InternalServerException, BadRequestException {
+    private void validate(Transaction transaction) throws InternalServerException, BadRequestException {
 
         /*сумма транзакции больше указанного лимита +
         - сумма транзакций за день больше дневного лимита +
@@ -43,66 +41,69 @@ public class TransactionDAO {
         for (Transaction tr : getTransactionsPerDay(transaction.getDateCreated())) {
             sum += tr.getAmount();
             count++;
-            if (sum > utils.getLimitTransactionsPerDayAmount()) {
+        }
+            if (sum > utils.getLimitTransactionsPerDayAmount())
                 throw new LimitExceeded("Transaction limit per day amount exceeded " + transaction.getId() + ". Can't be saved");
 
-            }
 
-            if (count > utils.getLimitTransactionsPerDayCount()) {
+            if (count > utils.getLimitTransactionsPerDayCount())
                 throw new LimitExceeded("Transaction limit per day count exceeded " + transaction.getId() + ". Can't be saved");
+
+            boolean flagCity = false;
+            for (String city : utils.getCities()) {
+                if (city == transaction.getCity())
+                    flagCity = true;
             }
 
-            for (String city : utils.getCities()) {
-                if (tr.getCity() != city)
-                    throw new BadRequestException("Transaction in city: " + tr.getCity() + " Can't be saved");
+            if (!flagCity)
+                throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
 
+            boolean flagFreeSpace = false;
+            for (Transaction tr1 : transactions)
+                if (tr1 == null)
+                    flagFreeSpace = true;
+
+            if (!flagFreeSpace)
+                throw new InternalServerException("No free space for transaction " + transaction.getId());
+
+            for (Transaction tr2 : transactions)
+                if (tr2 != null && tr2.equals(transaction))
+                    throw new InternalServerException("No free space for transaction " + transaction.getId());
+    }
+
+
+        public Transaction[] transactionList () {
+
+            int len = 0;
+            Transaction[] transactionsList = new Transaction[len];
+            for (Transaction tr : transactions) {
+                transactions[len] = tr;
+                len++;
+            }
+
+            return transactionsList;
+
+        }
+
+        public Transaction[] transactionList (String city){
+
+            int count = 0;
+
+            for (Transaction tr : transactions) {
+                if (tr != null && tr.getCity().equals(city))
+                    transactions[count] = tr;
+                count++;
             }
 
             int i = 0;
-            if (tr == null) {
-                transactions[i] = tr;
+            Transaction[] transactionsList = new Transaction[count];
+            for (Transaction tr : transactions) {
+                if (tr != null && tr.getCity().equals(city))
+                    transactions[i] = tr;
+                i++;
             }
-            i++;
-
-        }
-
-        throw new InternalServerException("No free space for transaction " + transaction.getId());
-    }
-
-
-   public Transaction[] transactionList() {
-
-        int len = 0;
-        Transaction[] transactionsList = new Transaction[len];
-        for (Transaction tr : transactions) {
-            transactions[len] = tr;
-            len++;
-        }
 
         return transactionsList;
-
-    }
-
-    public Transaction[] transactionList(String city) {
-
-        int count = 0;
-
-        for (Transaction tr : transactions) {
-            if (tr != null && tr.getCity().equals(city))
-                transactions[count] = tr;
-            count++;
-        }
-
-        int i = 0;
-        Transaction[] transactionsList = new Transaction[count];
-        for (Transaction tr : transactions) {
-            if (tr != null && tr.getCity().equals(city))
-                transactions[i] = tr;
-            i++;
-        }
-
-        return transactionsList;
-
     }
 
     public Transaction[] transactionList(int amount) {
