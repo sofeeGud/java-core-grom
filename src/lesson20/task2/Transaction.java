@@ -50,15 +50,23 @@ public class Transaction {
 
         Transaction that = (Transaction) o;
 
+        if (id != that.id) return false;
         if (amount != that.amount) return false;
-        return city.equals(that.city);
+        if (!city.equals(that.city)) return false;
+        if (!description.equals(that.description)) return false;
+        if (type != that.type) return false;
+        return dateCreated.equals(that.dateCreated);
 
     }
 
     @Override
     public int hashCode() {
-        int result = city.hashCode();
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + city.hashCode();
         result = 31 * result + amount;
+        result = 31 * result + description.hashCode();
+        result = 31 * result + type.hashCode();
+        result = 31 * result + dateCreated.hashCode();
         return result;
     }
 }
