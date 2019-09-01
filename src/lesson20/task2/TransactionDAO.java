@@ -115,11 +115,11 @@ public class TransactionDAO {
             return  new Transaction[0];
 
         Transaction[] transactionList = new Transaction[count];
-        int index = 0;
+        int i = 0;
         for (Transaction tr : transactions)
             if (tr != null&&tr.getAmount()>0) {
-                transactionList[index] = tr;
-                index++;
+                transactionList[i] = tr;
+                i++;
             }
         return transactionList;
 
