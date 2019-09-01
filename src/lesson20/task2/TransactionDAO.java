@@ -15,7 +15,7 @@ public class TransactionDAO {
 
         validate(transaction);
 
-        for (int i= 0;i< transactions.length;i++){
+        for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] == null) {
                 transactions[i] = transaction;
                 return transactions[i];
@@ -26,7 +26,7 @@ public class TransactionDAO {
 
     private void validate(Transaction transaction) throws BadRequestException, InternalServerException {
 
-        if(transaction==null)
+        if (transaction == null)
             throw new BadRequestException("Transaction can't be null");
 
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
@@ -39,10 +39,10 @@ public class TransactionDAO {
             count++;
         }
 
-        if (sum + transaction.getAmount()> utils.getLimitTransactionsPerDayAmount())
+        if (sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount())
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
 
-        if (count  >= utils.getLimitTransactionsPerDayCount())
+        if (count >= utils.getLimitTransactionsPerDayCount())
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
 
         boolean flagCity = false;
@@ -68,36 +68,37 @@ public class TransactionDAO {
 
 
     }
-        public Transaction[] transactionList () {
 
-            int len = 0;
-            Transaction[] transactionsList = new Transaction[len];
-            for (Transaction tr : transactions) {
-                transactions[len] = tr;
-                len++;
-            }
+    public Transaction[] transactionList() {
 
-            return transactionsList;
-
+        int len = 0;
+        Transaction[] transactionsList = new Transaction[len];
+        for (Transaction tr : transactions) {
+            transactions[len] = tr;
+            len++;
         }
 
-        public Transaction[] transactionList (String city){
+        return transactionsList;
 
-            int count = 0;
+    }
 
-            for (Transaction tr : transactions) {
-                if (tr != null && tr.getCity().equals(city))
-                    transactions[count] = tr;
-                count++;
-            }
+    public Transaction[] transactionList(String city) {
 
-            int i = 0;
-            Transaction[] transactionsList = new Transaction[count];
-            for (Transaction tr : transactions) {
-                if (tr != null && tr.getCity().equals(city))
-                    transactions[i] = tr;
-                i++;
-            }
+        int count = 0;
+
+        for (Transaction tr : transactions) {
+            if (tr != null && tr.getCity().equals(city))
+                transactions[count] = tr;
+            count++;
+        }
+
+        int i = 0;
+        Transaction[] transactionsList = new Transaction[count];
+        for (Transaction tr : transactions) {
+            if (tr != null && tr.getCity().equals(city))
+                transactions[i] = tr;
+            i++;
+        }
 
         return transactionsList;
     }
@@ -105,19 +106,19 @@ public class TransactionDAO {
     public Transaction[] transactionList(int amount) {
 
         if (transactions == null)
-            return  new Transaction[0];
+            return new Transaction[0];
         int count = 0;
         for (Transaction tr : transactions)
-            if (tr != null &&tr.getAmount()>0)
+            if (tr != null && tr.getAmount() > 0)
                 count++;
 
         if (count == 0)
-            return  new Transaction[0];
+            return new Transaction[0];
 
         Transaction[] transactionList = new Transaction[count];
         int i = 0;
         for (Transaction tr : transactions)
-            if (tr != null&&tr.getAmount()>0) {
+            if (tr != null && tr.getAmount() > 0) {
                 transactionList[i] = tr;
                 i++;
             }
