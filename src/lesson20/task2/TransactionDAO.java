@@ -29,7 +29,7 @@ public class TransactionDAO {
         if (transaction == null)
             throw new BadRequestException("transaction can't be null");
 
-        if (transaction.getAmount() > utils.getLimitSimpleTransactionsAmount())
+        if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit  exceed " + transaction.getId() + ". Can't be saved");
 
         long sum = 0;
@@ -39,7 +39,7 @@ public class TransactionDAO {
             count++;
         }
 
-        if (sum + transaction.getAmount() > utils.getLimitSimpleTransactionsAmount())
+        if (sum + transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
 
         if (count >= utils.getLimitTransactionsPerDayCount())
