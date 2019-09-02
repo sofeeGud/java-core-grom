@@ -11,20 +11,23 @@ public class Demo {
         Transaction transaction1 = new Transaction(1, "Odessa", 10, "222", TransactionType.INCOME, new Date());
         Transaction transaction2 = new Transaction(2, "Lvov", 5, "333", TransactionType.INCOME, new Date());
         Transaction transaction3 = null;
+        Transaction transaction4 = new Transaction(4, "Kiev", 10, "222", TransactionType.INCOME, new Date());
         Controller controller = new Controller();
-        Transaction[] transactions = {transaction1, transaction2, transaction3};
+        Transaction[] transactions = {transaction1, transaction2, transaction3, transaction4};
+
+        for (Transaction transaction : transactions) {
             try {
-                controller.save(transaction1);
-                controller.save(transaction2);
-                controller.save(transaction3);
+                controller.save(transaction);
+                ;
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+        }
+
 
         System.out.println(Arrays.deepToString(controller.transactionList()));
-        System.out.println(Arrays.toString(controller.transactionList("Odessa")));
-        System.out.println(Arrays.toString(controller.transactionList(10)));
-
+        System.out.println(Arrays.deepToString(controller.transactionList("Odessa")));
+        System.out.println(Arrays.deepToString(controller.transactionList(10)));
     }
 }

@@ -8,7 +8,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TransactionDAO {
+
     private Transaction[] transactions = new Transaction[10];
+
     private Utils utils = new Utils();
 
 
