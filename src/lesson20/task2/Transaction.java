@@ -1,6 +1,7 @@
 package lesson20.task2;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Transaction {
     private long id;
@@ -47,26 +48,17 @@ public class Transaction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Transaction that = (Transaction) o;
-
-        if (id != that.id) return false;
-        if (amount != that.amount) return false;
-        if (!city.equals(that.city)) return false;
-        if (!description.equals(that.description)) return false;
-        if (type != that.type) return false;
-        return dateCreated.equals(that.dateCreated);
-
+        return id == that.id &&
+                amount == that.amount &&
+                city.equals(that.city) &&
+                description.equals(that.description) &&
+                type == that.type;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + city.hashCode();
-        result = 31 * result + amount;
-        result = 31 * result + description.hashCode();
-        result = 31 * result + type.hashCode();
-        result = 31 * result + dateCreated.hashCode();
-        return result;
+        return Objects.hash(id, city, amount, description, type, dateCreated);
     }
+
 }

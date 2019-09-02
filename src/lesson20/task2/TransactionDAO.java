@@ -11,139 +11,128 @@ public class TransactionDAO {
     private Transaction[] transactions = new Transaction[10];
     private Utils utils = new Utils();
 
-    public Transaction save(Transaction transaction) throws Exception{
+
+    public Transaction save(Transaction transaction) throws Exception {
 
         validate(transaction);
 
-        for (int i = 0; i < transactions.length; i++) {
-            if (transactions[i] == null) {
+        int i = 0;
+        for (Transaction tr : transactions) {
+            if (tr == null) {
                 transactions[i] = transaction;
                 return transactions[i];
             }
+            i++;
         }
+
         throw new InternalServerException("No free space for transaction " + transaction.getId());
     }
 
-    private void validate(Transaction transaction) throws BadRequestException, InternalServerException {
+    private void validate(Transaction transaction) throws BadRequestException {
 
         if (transaction == null)
-            throw new BadRequestException("Transaction can't be null");
+            throw new BadRequestException("Transaction is null. Can't be saved");
+
 
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
-            throw new LimitExceeded("Transaction limit  exceed " + transaction.getId() + ". Can't be saved");
+            throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can't be saved");
 
-        long sum = 0;
+
+        int sum = 0;
         int count = 0;
-        for (Transaction tr : getTransactionPerDay(transaction.getDateCreated())) {
-            sum += tr.getAmount();
-            count++;
+        for (Transaction tr : getTransactionsPerDay(transaction.getDateCreated())) {
+            if (tr != null) {
+                sum += tr.getAmount();
+                count++;
+            }
         }
 
-        if (sum + transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
+        if (sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
-
-        if (count >= utils.getLimitTransactionsPerDayCount())
-            throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
-
-        boolean flagCity = false;
-        for (String city : utils.getCities()) {
-            if (city == transaction.getCity())
-                flagCity = true;
         }
 
-        if (!flagCity)
-            throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
+        if (count >= utils.getLimitTransactionsPerDayCount()) {
+            throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
+        }
 
-        int countTr = 0;
-        for (Transaction tr : transactions)
+
+        for (String city : utils.getCities()) {
+            if (city != null && city.equals(transaction.getCity()))
+                return;
+        }
+        throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
+    }
+
+    public Transaction[] transactionList() {
+        int len = 0;
+        for (Transaction tr : transactions) {
             if (tr != null)
-                countTr++;
+                len++;
+        }
 
-        if (countTr >= transactions.length)
-            throw new InternalServerException("No free space for transaction " + transaction.getId());
+        Transaction[] transactionList = new Transaction[len];
 
-        for (Transaction tr : transactions)
-            if (tr != null && tr.equals(transaction))
-                throw new BadRequestException("Transaction already exist id: " + transaction.getId());
+        if (len == 0) return transactionList;
 
-
-    }
-
-    Transaction[] transactionList() {
-
-        if (transactions == null)
-            return new Transaction[0];
-        int count = 0;
-        for (Transaction tr : transactions)
-            if (tr != null && tr.getAmount() > 0)
-                count++;
-
-        if (count == 0)
-            return new Transaction[0];
-
-        Transaction[] transactionList = new Transaction[count];
         int i = 0;
-        for (Transaction tr : transactions)
-            if (tr != null && tr.getAmount() > 0) {
+        for (Transaction tr : transactions) {
+            if (tr != null) {
                 transactionList[i] = tr;
                 i++;
             }
+        }
         return transactionList;
-
     }
 
-    Transaction[] transactionList(String city) {
-        if (transactions == null)
-            return new Transaction[0];
+    public Transaction[] transactionList(String city) {
 
-        int count = 0;
-        for (Transaction tr : transactions)
-            if (tr != null && tr.getCity().equals(city) && tr.getAmount() > 0)
-                count++;
+        int len = 0;
+        for (Transaction tr : transactions) {
+            if (city != null && tr != null && city.equals(tr.getCity())) {
+                len++;
+            }
+        }
 
-        if (count == 0)
-            return new Transaction[0];
+        Transaction[] transactionList = new Transaction[len];
 
-        Transaction[] transactionList = new Transaction[count];
         int i = 0;
-        for (Transaction tr : transactions)
-            if (tr != null && tr.getCity().equals(city) && tr.getAmount() > 0) {
+        for (Transaction tr : transactions) {
+            if (tr != null && city != null && city.equals(tr.getCity())) {
                 transactionList[i] = tr;
                 i++;
             }
+        }
         return transactionList;
     }
 
-    Transaction[] transactionList(int amount) {
-        if (transactions == null)
-            return new Transaction[0];
+    public Transaction[] transactionList(int amount) {
 
-        int count = 0;
-        for (Transaction tr : transactions)
-            if (tr != null && tr.getAmount() == amount)
-                count++;
+        int len = 0;
+        for (Transaction tr : transactions) {
+            if (tr != null && tr.getAmount() == amount) {
+                len++;
+            }
+        }
 
-        if (count == 0)
-            return new Transaction[0];
+        Transaction[] transactionList = new Transaction[len];
 
-        Transaction[] transactionList = new Transaction[count];
         int i = 0;
-        for (Transaction tr : transactions)
+        for (Transaction tr : transactions) {
             if (tr != null && tr.getAmount() == amount) {
                 transactionList[i] = tr;
                 i++;
             }
+        }
         return transactionList;
     }
 
-    private Transaction[] getTransactionPerDay(Date dateOfCurTransaction) {
+    private Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         int count = 0;
-
         for (Transaction transaction : transactions) {
             if (transaction != null) {
                 calendar.setTime(transaction.getDateCreated());
@@ -154,7 +143,6 @@ public class TransactionDAO {
                     count++;
             }
         }
-
         Transaction[] result = new Transaction[count];
         int index = 0;
         for (Transaction transaction : transactions) {
@@ -169,8 +157,6 @@ public class TransactionDAO {
                 }
             }
         }
-
-
         return result;
     }
 }
