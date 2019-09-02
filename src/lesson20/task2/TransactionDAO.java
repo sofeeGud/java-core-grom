@@ -32,8 +32,8 @@ public class TransactionDAO {
 
     private void validate(Transaction transaction) throws BadRequestException {
 
-//        if (transaction == null)
-//            throw new BadRequestException("Transaction is null. Can't be saved");
+        if (transaction == null)
+            throw new BadRequestException("Transaction is null. Can't be saved");
 
         for (Transaction tr : transactions) {
             if (tr != null && tr.getId() == transaction.getId())
@@ -55,7 +55,7 @@ public class TransactionDAO {
         }
 
 
-        if (sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
+        if (sum  >= utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
         }
 
