@@ -55,7 +55,7 @@ public class TransactionDAO {
         }
 
 
-        if (sum  >= utils.getLimitTransactionsPerDayAmount()) {
+        if (sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
         }
 
@@ -64,11 +64,11 @@ public class TransactionDAO {
         }
 
 
-        for (String city : utils.getCities()) {
-            if (city != null && city.equals(transaction.getCity()))
-                return;
-        }
-        throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
+//        for (String city : utils.getCities()) {
+//            if (city != null && city.equals(transaction.getCity()))
+//                return;
+//        }
+//        throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
 
 
     }
