@@ -57,12 +57,11 @@ public class TransactionDAO {
         if (count == 0) throw new BadRequestException("Transaction already used " + transaction.getId() + ". Can't be saved");
 
 
-
-        if (sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
+        if (sum + transaction.getAmount() >= utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
         }
 
-        if (count > utils.getLimitTransactionsPerDayCount()) {
+        if (count >= utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
         }
 
