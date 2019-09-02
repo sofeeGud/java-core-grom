@@ -69,9 +69,9 @@ public class TransactionDAO {
                 return;
         }
 
-        if (count == 0) throw new BadRequestException("Transaction already used " + transaction.getId() + ". Can't be saved");
+//        if (count == 0) throw new BadRequestException("Transaction already used " + transaction.getId() + ". Can't be saved");
 
-        throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
+        throw new BadRequestException("Transaction in city: " + transaction.getId() + " Can't be saved");
 
 
     }
