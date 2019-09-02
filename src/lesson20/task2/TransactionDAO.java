@@ -50,8 +50,9 @@ public class TransactionDAO {
         for (Transaction tr : getTransactionsPerDay(transaction.getDateCreated())) {
             if (tr != null) {
                 sum += tr.getAmount();
-                count++;
+
             }
+            count++;
         }
 
 //        if (count == 0) throw new BadRequestException("Transaction already used " + transaction.getId() + ". Can't be saved");
