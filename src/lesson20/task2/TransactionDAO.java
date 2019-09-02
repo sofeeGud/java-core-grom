@@ -50,12 +50,9 @@ public class TransactionDAO {
         for (Transaction tr : getTransactionsPerDay(transaction.getDateCreated())) {
             if (tr != null) {
                 sum += tr.getAmount();
-
+                count++;
             }
-            count++;
         }
-
-//        if (count == 0) throw new BadRequestException("Transaction already used " + transaction.getId() + ". Can't be saved");
 
 
         if (sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
@@ -71,6 +68,9 @@ public class TransactionDAO {
             if (city != null && city.equals(transaction.getCity()))
                 return;
         }
+
+        if (count == 0) throw new BadRequestException("Transaction already used " + transaction.getId() + ". Can't be saved");
+
         throw new BadRequestException("Transaction in city: " + transaction.getCity() + " Can't be saved");
 
 
