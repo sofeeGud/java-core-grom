@@ -12,8 +12,9 @@ public class Demo {
         Transaction transaction2 = new Transaction(2, "Lvov", 5, "333", TransactionType.INCOME, new Date());
         Transaction transaction3 = null;
         Transaction transaction4 = new Transaction(4, "Kiev", 10, "222", TransactionType.INCOME, new Date());
+        Transaction transaction5 = new Transaction(4, "Kiev", 10, "222", TransactionType.INCOME, new Date());
         Controller controller = new Controller();
-        Transaction[] transactions = {transaction1, transaction2, transaction3, transaction4};
+        Transaction[] transactions = {transaction1, transaction2, transaction3, transaction4, transaction5};
 
         for (Transaction transaction : transactions) {
             try {
