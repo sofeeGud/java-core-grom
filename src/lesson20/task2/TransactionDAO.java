@@ -41,7 +41,7 @@ public class TransactionDAO {
         }
 
 
-        if (transaction.getAmount() <= 0 && transaction.getAmount() >= utils.getLimitSimpleTransactionAmount())
+        if (transaction.getAmount() <= 0 && transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can't be saved");
 
 
@@ -55,7 +55,7 @@ public class TransactionDAO {
         }
 
 
-        if (sum + transaction.getAmount() >= utils.getLimitTransactionsPerDayAmount()) {
+        if (sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
         }
 
