@@ -32,7 +32,11 @@ public class TransactionDAO {
 
     private void validate(Transaction transaction) throws BadRequestException {
 
-        if (transaction == null)
+        if (transaction == null
+                || transaction.getId() < 0
+                || transaction.getAmount() < 0
+                || transaction.getDateCreated() == null
+                || transaction.getType() == null)
             throw new BadRequestException("Transaction is null. Can't be saved");
 
         for (Transaction tr : transactions) {
@@ -41,7 +45,7 @@ public class TransactionDAO {
         }
 
 
-        if (transaction.getAmount() <= 0 && transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
+        if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can't be saved");
 
 
