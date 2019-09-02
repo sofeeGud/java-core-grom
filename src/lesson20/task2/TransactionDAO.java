@@ -32,12 +32,14 @@ public class TransactionDAO {
 
     private void validate(Transaction transaction) throws BadRequestException {
 
-        if (transaction == null
-                || transaction.getId() < 0
+        if (transaction == null)
+            throw new BadRequestException("Transaction is null. Can't be saved");
+
+        if (transaction.getId() < 0
                 || transaction.getAmount() < 0
                 || transaction.getDateCreated() == null
                 || transaction.getType() == null)
-            throw new BadRequestException("Transaction is null. Can't be saved");
+            throw new BadRequestException("Transaction is null " + transaction.getId() + " . Can't be saved");
 
         for (Transaction tr : transactions) {
             if (tr != null && tr.getId() == transaction.getId())
