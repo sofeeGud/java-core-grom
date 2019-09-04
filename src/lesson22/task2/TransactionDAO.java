@@ -11,7 +11,7 @@ public class TransactionDAO {
 
     private static Transaction[] transactions = new Transaction[10];
 
-    private static Utils utils = new Utils();
+    //private static Utils utils = new Utils();
 
 
     public static Transaction save(Transaction transaction) throws Exception {
@@ -41,7 +41,7 @@ public class TransactionDAO {
         }
 
 
-        if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
+        if (transaction.getAmount() > Utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can't be saved");
 
 
@@ -55,16 +55,16 @@ public class TransactionDAO {
         }
 
 
-        if (sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount()) {
+        if (sum + transaction.getAmount() > Utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
         }
 
-        if (count >= utils.getLimitTransactionsPerDayCount()) {
+        if (count >= Utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
         }
 
 
-        for (String city : utils.getCities()) {
+        for (String city : Utils.getCities()) {
             if (city != null && city.equals(transaction.getCity()))
                 return;
         }
