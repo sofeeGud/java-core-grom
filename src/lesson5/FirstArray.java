@@ -10,7 +10,7 @@ public class FirstArray {
         //type of array [] name of array = new type of array[length of array]
         int[] firstArray = new int[4]; //declaration
 
-        //System.out.println(Arrays.toString(firstArray));
+        //Sys.out.println(Arrays.toString(firstArray));
 
         // array name [index] - get array element
         firstArray[0] = 11;
@@ -22,13 +22,13 @@ public class FirstArray {
             System.out.println(firstArray[i]);
         }
 
-        //System.out.println(Arrays.toString(firstArray));
+        //Sys.out.println(Arrays.toString(firstArray));
 
 
         int b = 10;
         int[] secondArray = {1,10,15,20,-50};
 
-        //System.out.println(Arrays.toString(secondArray));
+        //Sys.out.println(Arrays.toString(secondArray));
 
         //for-each
         for(int element : secondArray) {

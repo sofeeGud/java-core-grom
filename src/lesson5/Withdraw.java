@@ -7,7 +7,7 @@ public class Withdraw {
         String[] names = {"Jack", "Ann", "Denis", "Andrey", "Nikolay", "Irina", "John"};
         int[] balances = {100, 500, 8732, -99, 12000, -54, 0};
         //withdraw(names, balances, "Ann", 500);
-        //System.out.println(Arrays.toString(balances));
+        //Sys.out.println(Arrays.toString(balances));
     }
 
     static int withdraw(String[] clients, int[] balances, String client, int amount) {

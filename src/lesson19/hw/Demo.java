@@ -55,10 +55,10 @@ public class Demo {
             //controller.delete(storage_3, file_8);
 
 
-            /*System.out.println(storage_1.toString());
-            System.out.println(storage_2.toString());
-            System.out.println(storage_3.toString());
-            System.out.println(storage_4.toString());*/
+            /*Sys.out.println(storage_1.toString());
+            Sys.out.println(storage_2.toString());
+            Sys.out.println(storage_3.toString());
+            Sys.out.println(storage_4.toString());*/
 
             controller.transferAll(storage_1, storage_2);
             //controller.transferAll(storage_2, storage_3);
@@ -70,10 +70,10 @@ public class Demo {
 
             /*controller.transferFile(storage_1, storage_2, 1);
             controller.transferFile(storage_3, storage_4, 9);
-            System.out.println(storage_1.toString());
-            System.out.println(storage_2.toString());
-            System.out.println(storage_3.toString());
-            System.out.println(storage_4.toString());*/
+            Sys.out.println(storage_1.toString());
+            Sys.out.println(storage_2.toString());
+            Sys.out.println(storage_3.toString());
+            Sys.out.println(storage_4.toString());*/
 
         } catch (Exception e) {
             System.err.println(e.getMessage());

@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Solution1 {
     public static void main(String[] args) {
         String test = "22 jfufy56 455.58 fkdkde    5656 djffkg 2.569 ";
-        //System.out.println(Arrays.toString(parseWords(test)));
+        //Sys.out.println(Arrays.toString(parseWords(test)));
         System.out.println((Arrays.toString(findNumbers(test))));
     }
 
