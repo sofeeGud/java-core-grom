@@ -49,7 +49,7 @@ public class GeneralDAO<T> {
     private void validate(T t) throws Exception {
 
         if (t == null)
-            throw new Exception(t + " don't save. It's null");
+            throw new Exception("Don't save. It's null");
 
         for (T el : array)
             if (t.equals(el))
