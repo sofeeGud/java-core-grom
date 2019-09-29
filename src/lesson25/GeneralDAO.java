@@ -6,7 +6,7 @@ public class GeneralDAO <T extends IdEntity> {
     private T[] array = (T[]) new Object[10];
 
 
-  /*  private void print(Order order) {
+  /*  private void print(lesson27.Order order) {
         System.out.println("order is: " + order.toString());
 
     }
