@@ -1,7 +1,6 @@
 package lesson26;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ArrayListTest {
     public static void main(String[] args) {
