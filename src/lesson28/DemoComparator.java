@@ -8,33 +8,32 @@ public class DemoComparator {
 
     public static void main(String[] args){
 
-        Capability capability2 = new Capability(1005, "test00", "nnnn", false, new Date());
+        Capability capability2 = new Capability(1005, null, "nnnn", false, new Date());
         Capability capability1 = new Capability(1001, "test00", "nnnn", true, new Date(96584565));
         Capability capability3 = new Capability(900, "test01", "nnnn", true,new Date(652265) );
-        Capability capability4 = new Capability(900, "test02", "aaaa", false, new Date());
+        Capability capability4 = new Capability(900, "test02", null, false, new Date());
+        //Capability capability5 = null;
+
+    ArrayList<Capability> capabilities = new ArrayList<>();
+    capabilities.add(capability1);
+    capabilities.add(capability2);
+    capabilities.add(capability3);
+    capabilities.add(capability4);
+    //capabilities.add(capability5);
+    //capabilities.add(null);
+
+    System.out.println(capabilities);
+    capabilities.sort(new IsActiveComparator());
+    System.out.println(capabilities);
+    System.out.println("------------------------------------------------------");
 
 
+    capabilities.sort(new DateComparator());
+    System.out.println(capabilities);
+    System.out.println("------------------------------------------------------");
 
-        ArrayList<Capability> capabilities = new ArrayList<>();
-        capabilities.add(capability1);
-        capabilities.add(capability2);
-        capabilities.add(capability3);
-        capabilities.add(capability4);
-
-        System.out.println(capabilities);
-        capabilities.sort(new IsActiveComparator());
-        System.out.println(capabilities);
-        System.out.println("------------------------------------------------------");
-
-
-        capabilities.sort(new DateComparator());
-        System.out.println(capabilities);
-        System.out.println("------------------------------------------------------");
-
-        capabilities.sort(new FullComparator());
-        System.out.println(capabilities);
-
-
+    capabilities.sort(new FullComparator());
+    System.out.println(capabilities);
 
     }
 }
