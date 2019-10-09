@@ -15,14 +15,13 @@ public class DemoComparator {
         //Capability capability5 = null;
 
 
-        try {
+
             ArrayList<Capability> capabilities = new ArrayList<>();
             capabilities.add(capability1);
             capabilities.add(capability2);
             capabilities.add(capability3);
             capabilities.add(capability4);
-            //capabilities.add(capability5);
-            //capabilities.add(null);
+
 
             System.out.println(capabilities);
             capabilities.sort(new IsActiveComparator());
@@ -37,8 +36,5 @@ public class DemoComparator {
             capabilities.sort(new FullComparator());
             System.out.println(capabilities);
 
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
     }
 }
