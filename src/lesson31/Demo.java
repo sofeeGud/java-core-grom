@@ -6,7 +6,7 @@ public class Demo {
         Solution solution = new Solution();
 
 
-        String testSymbol1 = "qweqweeq";
+        String testSymbol1 = "qweqweeqn";
         String testSymbol2 = "";
         String testSymbol3 = "qweqweeq  ";
         String testSymbol4 = "qw22eqweeq";
