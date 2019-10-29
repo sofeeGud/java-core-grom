@@ -29,7 +29,7 @@ public class ReadWriteFile {
         }
     }
 
-    public void writeFile(String path) throws InterruptedException {
+    public void writeFile(String path){
 
         FileWriter writer = null;
         BufferedWriter bufferedWriter = null;
