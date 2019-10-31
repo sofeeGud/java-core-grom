@@ -45,6 +45,7 @@ public class ReadWriteFile {
         } catch (IOException e) {
             System.err.println("Can`t write to file");
             return;
+
         } finally {
             IOUtils.closeQuietly(bufferedWriter);
             IOUtils.closeQuietly(writer);
