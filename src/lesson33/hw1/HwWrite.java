@@ -6,23 +6,19 @@ import java.io.*;
 
 public class HwWrite {
 
-    public void writeToFileFromConsole(String path) {
+    public void writeToFileFromConsole(String path) throws IOException {
         System.out.println("Enter file content to write the file:");
         foundPath(path);
         InputStreamReader reader = new InputStreamReader(System.in);
-
-        try (BufferedReader br = new BufferedReader(reader)) {
-            String input;
-            while ((input = br.readLine()) != null) {
-                if (input.equals("wr"))
-                    return;
-                writing(path, input);
-            }
-        } catch (IOException e) {
-            System.err.println("Reading from keyboard failed");
-        } finally {
-            IOUtils.closeQuietly(reader);
+        BufferedReader br = new BufferedReader(reader);
+        String input;
+        while ((input = br.readLine()) != null) {
+            if (input.equals("wr"))
+                return;
+            writing(path, input);
         }
+        IOUtils.closeQuietly(reader);
+        IOUtils.closeQuietly(br);
     }
 
     private static void writing(String path, String line) {
