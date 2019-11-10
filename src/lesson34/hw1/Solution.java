@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Solution {
 
-    public void copyFileContent(String fileFromPath, String fileToPath) throws Exception {
+    public void transferFileContent(String fileFromPath, String fileToPath) throws Exception {
 
         validate(fileFromPath, fileToPath);
 
