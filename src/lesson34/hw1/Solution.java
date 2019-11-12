@@ -7,7 +7,6 @@ public class Solution {
     public void transferFileContent(String fileFromPath, String fileToPath) throws Exception {
 
         validate(fileFromPath, fileToPath);
-
         writeToFile(fileToPath, readFromFile(fileFromPath));
         cleanFromFile(fileFromPath);
     }
@@ -20,8 +19,6 @@ public class Solution {
                 res.append(line);
                 res.append("\r\n");
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("File does not exist");
         } catch (IOException e) {
             System.err.println("Reading from file " + path + " failed");
         }

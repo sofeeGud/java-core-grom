@@ -1,14 +1,27 @@
-package lesson34;
+package lesson34.hw2;
 
 import java.io.*;
 
 public class Solution {
 
-   public void copyFileContent(String fileFromPath, String fileToPath) throws Exception {
+    public void transferSentences(String fileFromPath, String fileToPath, String word) throws Exception {
 
-       validate(fileFromPath, fileToPath);
-       writeToFile(fileToPath, readFromFile(fileFromPath));
-   }
+        validate(fileFromPath, fileToPath);
+        String[] sentences = readFromFile(fileFromPath).toString().split("[.]");
+        StringBuffer textTo = new StringBuffer();
+        StringBuffer textFrom = new StringBuffer();
+        for (String sen : sentences) {
+            if (sen.length() > 10 && sen.contains(word)) {
+                    textTo.append(sen);
+                    textTo.append("\n");
+                }  else {
+                    textFrom.append(sen);
+                    textFrom.append("\n");
+                }
+            }
+        writeToFile(fileToPath, textTo);
+        writeToFile(fileFromPath, textFrom);
+    }
 
     private StringBuffer readFromFile(String path) {
         StringBuffer res = new StringBuffer();
@@ -26,7 +39,7 @@ public class Solution {
     }
 
     private void writeToFile(String path, StringBuffer contentToWrite) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, false))) {
             bufferedWriter.append(contentToWrite);
         } catch (IOException e) {
             System.err.println("Can't write to file");
