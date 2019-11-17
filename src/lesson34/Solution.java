@@ -20,7 +20,7 @@ public class Solution {
             }
             res.replace(res.length() - 1, res.length(), " ");
         } catch (IOException e) {
-            System.err.println("Reading from file " + path + " failed");
+            throw new RuntimeException("Reading from file " + path + " failed");
         }
         return res;
     }

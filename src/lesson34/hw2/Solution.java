@@ -12,13 +12,13 @@ public class Solution {
         StringBuffer textFrom = new StringBuffer();
         for (String sen : sentences) {
             if (sen.length() > 10 && sen.contains(word)) {
-                    textTo.append(sen);
-                    textTo.append("\n");
-                }  else {
-                    textFrom.append(sen);
-                    textFrom.append("\n");
-                }
+                textTo.append(sen);
+                textTo.append("\n");
+            } else {
+                textFrom.append(sen);
+                textFrom.append("\n");
             }
+        }
         writeToFile(fileToPath, textTo);
         writeToFile(fileFromPath, textFrom);
     }
@@ -33,7 +33,7 @@ public class Solution {
             }
             res.replace(res.length() - 1, res.length(), " ");
         } catch (IOException e) {
-            System.err.println("Reading from file " + path + " failed");
+            throw new RuntimeException("Reading from file " + path + " failed");
         }
         return res;
     }
