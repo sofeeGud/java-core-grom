@@ -4,11 +4,11 @@ import java.io.*;
 
 public class Solution {
 
-   public void copyFileContent(String fileFromPath, String fileToPath) throws Exception {
+    public void copyFileContent(String fileFromPath, String fileToPath) throws Exception {
 
-       validate(fileFromPath, fileToPath);
-       writeToFile(fileToPath, readFromFile(fileFromPath));
-   }
+        validate(fileFromPath, fileToPath);
+        writeToFile(fileToPath, readFromFile(fileFromPath));
+    }
 
     private StringBuffer readFromFile(String path) {
         StringBuffer res = new StringBuffer();
