@@ -11,8 +11,6 @@ public class UserRepository extends Repository<User> {
         super(path);
     }
 
-    boolean isLogin;
-
     public User insertUser(User user) throws Exception {
         if (user.getUserType() == null)
             user.setUserType(UserType.USER);
@@ -33,17 +31,6 @@ public class UserRepository extends Repository<User> {
         return null;
     }
 
-    void login(String userName, String password) throws Exception {
-        for (User us : getAll()) {
-            if ((userName == us.getUserName()) || (password == us.getPassword())) {
-                isLogin = true;
-            } else
-                System.err.println("Incorrect login or password");
-        }
-    }
 
-    void logout() {
-        isLogin = false;
-    }
 }
 
