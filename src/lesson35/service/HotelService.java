@@ -10,7 +10,7 @@ public class HotelService {
         hotelRepository = new HotelRepository();
     }
 
-    public Hotel addHotel(Hotel hotel) throws NullPointerException {
+    public Hotel addHotel(Hotel hotel) throws Exception {
         hotel.setId(hotelRepository.genId());
         try {
 
@@ -19,15 +19,14 @@ public class HotelService {
                 System.err.println("Hotel with id=" + hotel.getId() + " can not be registered");
             } else hotelRepository.insertHotel(hotel);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
         return hotel;
     }
 
     public boolean validateHotel(Hotel hotel) throws Exception {
-        for (Hotel ho : hotelRepository.mapping()) {
-            if ((ho.getName().equals(hotel.getName())) && (ho.getCity().equals(hotel.getCity())) &&
-                    (ho.getCountry().equals(hotel.getCountry())) && (ho.getStreet().equals(hotel.getStreet()))) {
+        for (Hotel ho : hotelRepository.getAll()) {
+            if (hotel.equals(ho)) {
                 System.err.println("Hotel is already registered");
                 return false;
             }

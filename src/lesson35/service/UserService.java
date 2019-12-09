@@ -26,7 +26,7 @@ public class UserService {
 
         //  проверить логин, в случае успеха вернуть true
 
-        for (User user1 : userRepository.mapping()) {
+        for (User user1 : userRepository.getAll()) {
             if (user.getUserName() != null && user1.getUserName().equals(user.getUserName())) {
                 System.err.println("login already is using");
                 return false;

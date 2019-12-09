@@ -11,7 +11,7 @@ public class RoomController {
         roomService = new RoomService();
     }
 
-    public Room addRoom(Room room) {
+    public Room addRoom(Room room) throws Exception {
         return roomService.addRoom(room);
     }
 }

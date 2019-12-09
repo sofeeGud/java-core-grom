@@ -10,7 +10,9 @@ public class HotelController {
         hotelService = new HotelService();
     }
 
-    public Hotel addHotel(Hotel hotel) {
+
+
+    public Hotel addHotel(Hotel hotel) throws Exception {
         return hotelService.addHotel(hotel);
     }
 }

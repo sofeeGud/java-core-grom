@@ -3,8 +3,6 @@ package lesson35.repository;
 import lesson35.model.User;
 import lesson35.model.UserType;
 
-import java.io.*;
-import java.util.*;
 
 public class UserRepository extends Repository<User> {
     private static final String path = "C:/Users/Lenovo T540p/Desktop/UserDb.txt";
@@ -13,31 +11,39 @@ public class UserRepository extends Repository<User> {
         super(path);
     }
 
+    boolean isLogin;
+
     public User insertUser(User user) throws Exception {
-        mapping();
         if (user.getUserType() == null)
             user.setUserType(UserType.USER);
         return writeToFile(user);
     }
 
-
-    public Set<User> mapping() throws Exception {
-
-        Set<User> users = new HashSet<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                users.add(parseUser(line));
-            }
-        } catch (IOException e) {
-            throw new Exception("Reading from file " + path + " failed");
-        }
-        return users;
-    }
-
-    private User parseUser(String line) {
+    @Override
+    public User parse(String line) {
         String[] userArr = line.split(",");
         return new User(Long.parseLong(userArr[0]), userArr[1], userArr[2], userArr[3], UserType.valueOf(userArr[4]));
+    }
+
+    public User findUserById(Long id) throws Exception {
+        for (User user : getAll()) {
+            if (user.getId() == id)
+                return user;
+        }
+        return null;
+    }
+
+    void login(String userName, String password) throws Exception {
+        for (User us : getAll()) {
+            if ((userName == us.getUserName()) || (password == us.getPassword())) {
+                isLogin = true;
+            } else
+                System.err.println("Incorrect login or password");
+        }
+    }
+
+    void logout() {
+        isLogin = false;
     }
 }
 

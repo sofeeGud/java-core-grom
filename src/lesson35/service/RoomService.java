@@ -11,7 +11,7 @@ public class RoomService {
         roomRepository = new RoomRepository();
     }
 
-    public Room addRoom(Room room) throws NullPointerException {
+    public Room addRoom(Room room) throws Exception {
         room.setId(roomRepository.genId());
         try {
             if (!validateRoom(room))
@@ -20,7 +20,7 @@ public class RoomService {
                 roomRepository.insertRoom(room);
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
 
         return room;
@@ -28,10 +28,12 @@ public class RoomService {
 
     private boolean validateRoom(Room room) {
         if ((room.getNumberOfGuests() == 0) || (room.getPrice() == 0) ||
-                (room.getDateAvailableFrom() == null) || (room.getHotel() == null)) {
+                (room.getHotel() == null)) {
             System.err.println("Empty fields for room registration");
             return false;
         }
         return true;
     }
+
+     //(room.getDateAvailableFrom() == null) ||
 }
