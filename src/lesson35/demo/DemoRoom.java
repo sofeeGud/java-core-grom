@@ -7,9 +7,8 @@ import lesson35.repository.HotelRepository;
 
 import java.util.Date;
 
-import static lesson35.demo.Demo.auth;
-
 public class DemoRoom {
+    public static Authorization auth;
     public static void main(String[] args) throws Exception {
         auth = new Authorization();
         auth.login("login11", "password1");

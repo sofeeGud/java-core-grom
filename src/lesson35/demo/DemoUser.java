@@ -5,7 +5,7 @@ import lesson35.model.User;
 import lesson35.model.UserType;
 
 public class DemoUser {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         UserController userController = new UserController();
         User user1 = new User(0, "login11", "password1", "country1", UserType.ADMIN);
