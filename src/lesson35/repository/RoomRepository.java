@@ -1,12 +1,13 @@
 package lesson35.repository;
 
 import lesson35.model.Room;
+
 import java.text.SimpleDateFormat;
 
 public class RoomRepository extends Repository<Room> {
     private static final String path = "C:/Users/Lenovo T540p/Desktop/RoomDb.txt";
 
-    public RoomRepository() throws Exception {
+    public RoomRepository() {
         super(path);
     }
 
@@ -25,10 +26,14 @@ public class RoomRepository extends Repository<Room> {
     }
 
     public Room findRoomById(Long id) throws Exception {
-        for (Room room: getAll()) {
+        for (Room room : getAll()) {
             if (room.getId() == id)
                 return room;
         }
         return null;
+    }
+
+    public void deleteRoom(long roomId) throws Exception {
+        cleanFromDb(findRoomById(roomId).getId());
     }
 }

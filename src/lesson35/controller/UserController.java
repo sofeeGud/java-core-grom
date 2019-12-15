@@ -7,12 +7,11 @@ public class UserController {
 
     private UserService userService;
 
-    public UserController() throws Exception {
+    public UserController() {
         userService = new UserService();
     }
 
-    public User registerUser(User user) throws Exception {
-
+    public User registerUser(User user) {
         return userService.registerUser(user);
     }
 

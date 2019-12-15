@@ -1,6 +1,5 @@
 package lesson35.model;
 
-import lesson35.model.Hotel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,6 +53,10 @@ public class Room {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setDateAvailableFrom(Date dateAvailableFrom) {
+        this.dateAvailableFrom = dateAvailableFrom;
     }
 
     @Override

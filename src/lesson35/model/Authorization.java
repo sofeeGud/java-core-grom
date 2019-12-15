@@ -4,34 +4,32 @@ import lesson35.repository.UserRepository;
 
 public class Authorization {
     private boolean isLogin = false;
-    private User user;
+    private User userNow;
     UserRepository userRepository = new UserRepository();
 
-    public Authorization() throws Exception {
+    public Authorization() {
     }
 
     public void login(String userName, String password) throws Exception {
         for (User us : userRepository.getAll()) {
-            if ((userName == us.getUserName()) || (password == us.getPassword())) {
-                us = user;
+            if (us.getUserName().equals(userName) || us.getPassword().equals(password)) {
                 isLogin = true;
-
-            } else {
-                System.err.println("Incorrect login or password");
-                logout();
+                userNow = us;
             }
         }
+        if (!isLogin)
+            System.err.println("Incorrect login " + userName + " or password " + password + " in method login");
     }
 
     public void logout() {
         isLogin = false;
     }
 
-    public boolean checkIn() throws Exception {
+    public boolean checkIn() {
         return isLogin;
     }
 
-    public boolean isAdmin() throws Exception {
-        return user.getUserType()==UserType.ADMIN;
+    public boolean isAdmin() {
+        return userNow.getUserType() == UserType.ADMIN;
     }
 }

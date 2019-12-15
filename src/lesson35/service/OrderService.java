@@ -14,12 +14,15 @@ public class OrderService {
     }
 
     public void bookRoom(long roomId, long userId, long hotelId, Date dateTo) throws Exception {
-        if (!orderRepository.validateOrder(roomId,userId,hotelId)){
-            System.err.println("Failed to place an order. Check incoming parameters.");
+        if (!orderRepository.validateOrder(roomId, userId, hotelId)) {
+            System.err.println("Failed to place an order. Check incoming parameters. In method bookRoom");
         } else
-            orderRepository.bookRoom(roomId,userId,dateTo);
+            orderRepository.bookRoom(roomId, userId, dateTo);
     }
-    void cancelReservation(long roomId, long userId){
+
+    public void cancelReservation(long roomId, long userId) throws Exception {
+        orderRepository.cancelReservation(roomId, userId);
     }
+
 
 }

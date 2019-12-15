@@ -22,4 +22,32 @@ public class Filter {
         this.country = country;
         this.city = city;
     }
+
+    public int getNumberOfGuests() {
+        return numberOfGuests;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public boolean isBreakfastIncluded() {
+        return breakfastIncluded;
+    }
+
+    public boolean isPetsAllowed() {
+        return petsAllowed;
+    }
+
+    public Date getDateAvailableFrom() {
+        return dateAvailableFrom;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
 }

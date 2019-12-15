@@ -15,7 +15,7 @@ public class RoomService {
         room.setId(roomRepository.genId());
         try {
             if (!validateRoom(room))
-                System.err.println("Room with id=" + room.getId() + " can not be registered");
+                System.err.println("Room with id=" + room.getId() + " can not be registered in method addRoom");
             else
                 roomRepository.insertRoom(room);
 
@@ -29,11 +29,13 @@ public class RoomService {
     private boolean validateRoom(Room room) {
         if ((room.getNumberOfGuests() == 0) || (room.getPrice() == 0) ||
                 (room.getHotel() == null)) {
-            System.err.println("Empty fields for room registration");
+            System.err.println("Empty fields for room registration in method validateRoom");
             return false;
         }
         return true;
     }
 
-     //(room.getDateAvailableFrom() == null) ||
+    public void deleteRoom(long roomId) throws Exception {
+        roomRepository.deleteRoom(roomId);
+    }
 }

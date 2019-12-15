@@ -6,7 +6,7 @@ import lesson35.model.User;
 public class UserService {
     private UserRepository userRepository;
 
-    public UserService() throws Exception {
+    public UserService() {
         userRepository = new UserRepository();
     }
 
@@ -14,7 +14,7 @@ public class UserService {
         user.setId(userRepository.genId());
         try {
             if (!validateLog(user) || user.getPassword() == null || user.getCountry() == null) {
-                System.err.println("User with id=" + user.getId() + " can not be registered");
+                System.err.println("User with id=" + user.getId() + " can not be registered in method registerUser");
             } else userRepository.insertUser(user);
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -28,7 +28,7 @@ public class UserService {
 
         for (User user1 : userRepository.getAll()) {
             if (user.getUserName() != null && user1.getUserName().equals(user.getUserName())) {
-                System.err.println("login already is using");
+                System.err.println("login " + user.getUserName() + " already is using in method validateLog");
                 return false;
             }
         }

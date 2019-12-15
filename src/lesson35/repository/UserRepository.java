@@ -7,7 +7,7 @@ import lesson35.model.UserType;
 public class UserRepository extends Repository<User> {
     private static final String path = "C:/Users/Lenovo T540p/Desktop/UserDb.txt";
 
-    public UserRepository() throws Exception {
+    public UserRepository() {
         super(path);
     }
 
@@ -30,7 +30,5 @@ public class UserRepository extends Repository<User> {
         }
         return null;
     }
-
-
 }
 

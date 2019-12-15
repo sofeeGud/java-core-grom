@@ -1,20 +1,36 @@
 package lesson35.controller;
 
-import lesson35.model.Authorization;
+import lesson35.demo.Demo;
 import lesson35.model.Hotel;
+import lesson35.model.UserType;
 import lesson35.service.HotelService;
 
-public class HotelController {
+public class HotelController extends Controller {
     private HotelService hotelService;
-    Authorization authorization = new Authorization();
 
-    public HotelController() throws Exception {
+    public HotelController() {
         hotelService = new HotelService();
+        authorization = Demo.auth;
     }
 
     public Hotel addHotel(Hotel hotel) throws Exception {
-        if ((!authorization.checkIn()) || (!authorization.isAdmin()))
-            System.err.println("You can not using this function");
-            return hotelService.addHotel(hotel);
+        isAccess(UserType.ADMIN);
+        return hotelService.addHotel(hotel);
+    }
+
+    public void deleteHotel(long hotelId) throws Exception {
+        isAccess(UserType.ADMIN);
+        hotelService.deleteHotel(hotelId);
+    }
+
+    public Hotel findHotelByName(String name) throws Exception {
+        isAccess(UserType.USER);
+        return hotelService.findHotelByName(name);
+
+    }
+
+    public Hotel findHotelByCity(String city) throws Exception {
+        isAccess(UserType.USER);
+        return hotelService.findHotelByCity(city);
     }
 }
