@@ -40,9 +40,11 @@ public class OrderRepository extends Repository<Order> {
     public void cancelReservation(long roomId, long userId) throws Exception {
         long orderId = 0;
         for (Order order : getAll()) {
-            if (order.getRoom().getId() == roomId || order.getUser().getId() == userId)
+            if (order.getRoom().getId() == roomId && order.getUser().getId() == userId) {
                 orderId = order.getId();
-            cleanFromDb(orderId);
+                cleanFromDb(orderId);
+                roomRepository.updateDateRoom(order.getRoom());
+            }
         }
     }
 

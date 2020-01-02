@@ -32,27 +32,21 @@ public class HotelRepository extends Repository<Hotel> {
         return null;
     }
 
-    public Hotel findHotelByName(String name) {
-        try {
+    public Hotel findHotelByName(String name) throws Exception {
             for (Hotel hotel : getAll()) {
                 if (hotel.getName().equals(name))
                     return hotel;
             }
-        } catch (Exception e) {
-            System.err.println("Hotel with name= " + name + " was not found in method findHotelByName");
-        }
         return null;
+
     }
 
-    public Hotel findHotelByCity(String city) {
-        try {
+    public Hotel findHotelByCity(String city) throws Exception {
             for (Hotel hotel : getAll()) {
                 if (hotel.getCity().equals(city))
                     return hotel;
             }
-        } catch (Exception e) {
-            System.err.println("Hotel with city= " + city + " was not found  in method findHotelByCity");
-        }
+
         return null;
     }
 

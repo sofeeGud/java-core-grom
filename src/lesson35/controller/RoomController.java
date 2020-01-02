@@ -1,9 +1,12 @@
 package lesson35.controller;
 
 import lesson35.demo.Demo;
+import lesson35.model.Filter;
 import lesson35.model.Room;
 import lesson35.model.UserType;
 import lesson35.service.RoomService;
+
+import java.util.Set;
 
 public class RoomController extends Controller {
 
@@ -22,5 +25,8 @@ public class RoomController extends Controller {
     public void deleteRoom(long roomId) throws Exception {
         isAccess(UserType.ADMIN);
         roomService.deleteRoom(roomId);
+    }
+    public Set<Room> findRooms(Filter filter) throws Exception {
+        return roomService.findRooms(filter);
     }
 }

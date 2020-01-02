@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Date;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public abstract class Repository<T> {
@@ -31,11 +32,9 @@ public abstract class Repository<T> {
     public abstract T parse(String line) throws Exception;
 
     public T writeToFile(T t) throws IOException {
-
-        try (BufferedReader br = new BufferedReader(new FileReader(path)); BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
-            if (br.readLine() != null)
-                bw.append("\r\n");
+        try ( BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
             bw.append(t.toString());
+            bw.append("\r\n");
         } catch (IOException e) {
             throw new IOException("Writing to file " + path + " failed");
         }
@@ -43,9 +42,8 @@ public abstract class Repository<T> {
     }
 
     public Long genId() {
-        Date date = new Date();
-
-        return date.getTime();
+        Random rand = new Random();
+        return rand.nextLong();
     }
 
 

@@ -10,14 +10,14 @@ public class UserService {
         userRepository = new UserRepository();
     }
 
-    public User registerUser(User user) throws NullPointerException {
+    public User registerUser(User user) throws Exception {
         user.setId(userRepository.genId());
         try {
             if (!validateLog(user) || user.getPassword() == null || user.getCountry() == null) {
-                System.err.println("User with id=" + user.getId() + " can not be registered in method registerUser");
+                throw new Exception("User with id=" + user.getId() + " can not be registered in method registerUser");
             } else userRepository.insertUser(user);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
         return user;
     }

@@ -55,8 +55,8 @@ public class Room {
         this.id = id;
     }
 
-    public void setDateAvailableFrom(Date dateAvailableFrom) {
-        this.dateAvailableFrom = dateAvailableFrom;
+    public Date setDateAvailableFrom(Date dateAvailableFrom) {
+        return  this.dateAvailableFrom = dateAvailableFrom;
     }
 
     @Override

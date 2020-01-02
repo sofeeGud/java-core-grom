@@ -1,7 +1,10 @@
 package lesson35.service;
 
+import lesson35.model.Filter;
 import lesson35.model.Room;
 import lesson35.repository.RoomRepository;
+
+import java.util.Set;
 
 public class RoomService {
 
@@ -37,5 +40,9 @@ public class RoomService {
 
     public void deleteRoom(long roomId) throws Exception {
         roomRepository.deleteRoom(roomId);
+    }
+
+    public Set<Room> findRooms(Filter filter) throws Exception {
+       return roomRepository.findRooms(filter);
     }
 }

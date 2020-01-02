@@ -39,12 +39,12 @@ public class HotelService {
         hotelRepository.deleteHotel(hotelId);
     }
 
-    public Hotel findHotelByName(String name) {
+    public Hotel findHotelByName(String name) throws Exception {
         return hotelRepository.findHotelByName(name);
 
     }
 
-    public Hotel findHotelByCity(String city) {
+    public Hotel findHotelByCity(String city) throws Exception {
 
         return hotelRepository.findHotelByCity(city);
     }
